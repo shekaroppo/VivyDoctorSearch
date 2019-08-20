@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="card_margin_horizontal">8dp</dimen>
+    <dimen name="card_margin_vertical">4dp</dimen>
+    <dimen name="card_recycler_corner_radius">2dp</dimen>
+    <dimen name="card_recycler_elevation">2dp</dimen>
+
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin_very_small">4dp</dimen>
+
+
+    <dimen name="avatar_size">56dp</dimen>
+</resources>

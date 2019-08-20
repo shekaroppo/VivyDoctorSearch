@@ -1,0 +1,145 @@
+{
+  "doctors": [
+    {
+      "id": "ChIJxwgRnJ0Tc0EROCtAeGy1i8o",
+      "name": "Dr. med. Christiane Stephan-Seffer",
+      "photoId": "CmRaAAAA2ArYMmbILswPbV9GtiYrViYWhVrEFDhHE0Qz7voQpMwMo_ZCtGnNKKtSUUd-3UpJfyA1_gCtR3diG9hh5ZJBfRc8bMqsn2pJF_xv-dfpvwZNw9tMrj9p0LkjdW_P1iEhD-71HnVQE0LblJf4lXIFZyGhR4rUEqNsbCJqA5FoApVQKQ09OjcA",
+      "rating": 4.0,
+      "address": "Roßmarkt 5, 601 Frankfurt am Main, Germany",
+      "lat": 50.27248,
+      "lng": 8.6786800000002,
+      "highlighted": false,
+      "reviewCount": 5,
+      "specialityIds": [
+        1
+      ],
+      "source": "google",
+      "phoneNumber": "+49 69 677350",
+      "email": null,
+      "website": "http://www.doc-seffer.de/",
+      "openingHours": [
+        "D1T08:00/D1T:00",
+        "D1T:/D1T16:",
+        "D2T10:/D2T16:00",
+        "D3T08:00/D3T:00",
+        "D4T08:00/D4T:00",
+        "D4T:/D4T16:",
+        "D5T08:00/D5T:00"
+      ],
+      "integration": null,
+      "translation": null
+    },
+    {
+      "id": "ChIJeaCsBx4MvUcRfPbO5O5cv0U",
+      "name": "Dr. med. Birgit Götting",
+      "photoId": null,
+      "rating": 5.0,
+      "address": "Walter-Kolb-Straße 9 - , 60594 Frankfurt am Main, Germany",
+      "lat": 50.1054519,
+      "lng": 8.6858937,
+      "highlighted": false,
+      "reviewCount": 2,
+      "specialityIds": [
+        1
+      ],
+      "source": "google",
+      "phoneNumber": "+49 69 6589",
+      "email": null,
+      "website": "http://www.urologen-frankfurt.de/",
+      "openingHours": [
+        "D1T09:00/D1T:00",
+        "D1T:00/D1T:00",
+        "D2T09:00/D2T:00",
+        "D2T:00/D2T:00",
+        "D3T09:00/D3T:00",
+        "D4T09:00/D4T:00",
+        "D4T:00/D4T:00",
+        "D5T09:00/D5T:00"
+      ],
+      "integration": null,
+      "translation": null
+    },
+    {
+      "id": "ChIJeaCsBx4MvUcRipUrdyaHpBI",
+      "name": "Praxis Frau Dr. Kate H.-Y. Chang",
+      "photoId": "CmRaAAAAXVtpTlNHirqGGE-sjFVQbqTQanqbGhspCOtxFNHQQ7ZDarF3kHJmz5U-44zUgG59IzrrICw41E_spy6IdxkB1s4t9n0349Vg62ywXzZIex-2iQ9GBnpYGxr-vF-weKUTEhAwwaMGCPseYrnXfhkRVusjGhTtZ2x7ojoljGTgytLcPKNlU3wMIg",
+      "rating": 5.0,
+      "address": "Walter-Kolb-Straße 9-, 60594 Frankfurt am Main, Germany",
+      "lat": 50.10541999999999,
+      "lng": 8.685970000000001,
+      "highlighted": false,
+      "reviewCount": 1,
+      "specialityIds": [
+        1
+      ],
+      "source": "google",
+      "phoneNumber": "+49 69 625162",
+      "email": null,
+      "website": "http://www.dr-chang-frankfurt.de/",
+      "openingHours": [
+        "D1T08:00/D1T:00",
+        "D1T:/D1T:00",
+        "D2T08:00/D2T:00",
+        "D2T:/D2T:00",
+        "D3T08:00/D3T:00",
+        "D4T08:00/D4T:00",
+        "D4T:/D4T:00",
+        "D5T08:00/D5T:00"
+      ],
+      "integration": null,
+      "translation": null
+    },
+    {
+      "id": "ChIJ0d0mBZ8Tc0ERVfl0KPvW0-A",
+      "name": "Simona Herle",
+      "photoId": null,
+      "rating": 1.5,
+      "address": "Schillerstraße 26, 603 Frankfurt am Main, Germany",
+      "lat": 50.5909999999,
+      "lng": 8.6789892,
+      "highlighted": false,
+      "reviewCount": 5,
+      "specialityIds": [
+        1
+      ],
+      "source": "google",
+      "phoneNumber": "+49 69 27",
+      "email": null,
+      "website": "http://www.drsimonaherle.de/",
+      "openingHours": [
+        "D1T08:00/D1T:00",
+        "D1T:00/D1T:00",
+        "D2T08:00/D2T:00",
+        "D2T:00/D2T:00",
+        "D3T08:00/D3T:00",
+        "D4T08:00/D4T:00",
+        "D4T:00/D4T:00",
+        "D5T08:00/D5T:00"
+      ],
+      "integration": null,
+      "translation": null
+    },
+    {
+      "id": "ChIJY8NNMKkOvUcRiYFb8l3DGxQ",
+      "name": "Dr. med. Angela Schubert",
+      "photoId": null,
+      "rating": 2.700000047683716,
+      "address": "Kaiserstraße 5, 601 Frankfurt am Main, Germany",
+      "lat": 50.53,
+      "lng": 8.6766458,
+      "highlighted": false,
+      "reviewCount": 5,
+      "specialityIds": [
+        1
+      ],
+      "source": "google",
+      "phoneNumber": "+49 69 91060",
+      "email": null,
+      "website": "http://www.goetheplatzgyn.de/",
+      "openingHours": [],
+      "integration": null,
+      "translation": null
+    }
+  ],
+  "lastKey": "CpQECQIAADBB2XxKPAsLvHDGv7EcMelOCZYS4kc40CgkSdbmz0aYEV6w6Tvm3sIZf-bMiz9BIn3oVYinWKwySXFXgf72TXqCI6xn-ScFYEowLUkUcYw-sz2w9CZRlAPBcg9dIeN_gZl_sjMNE6nXE6ZKKmTV6i_hZPkl8NjpPCXBG8x6lmHpF1wVz_yw6-rl2cklRuCug9aDRBJBh8q3iM0ZRmp27gfmjT1mGkSAzEn2tsgYsWNe-3I7ATsZgt0Q4ZJvVYiK0Ebg_idFiMD2IoX7KIvAfdLd0RnKu_ND38hTmHzqeiG5DRNKPUFN-x5rfi8ZMWY0cpIAu93KZoPj3uLJ783we3Tks0rQHu1tTGMWxgcQz1moGdr9eFqVMSLxN_x_DVr38ewh7UR8Qmfux-1b7jnYc2pEoICm251nQU6vmUTdNBlkIFywtiBfFoxCzyvXOlynWW2yttpYJ9V_zHGNHVHbiOF0Hpk0so_jyH9hKBDFY3Eo3OlUfkfdm-PVqY05gBAAUMcwUQTwoRf2y76MWAs8m3JiGbSRC3fQkln7NT_P-tKvtIHXIMCNpaQDZVNrpXKUG0xE2-cU9lTD_A9VwAgcJJaiEkozeEsTDu9tKjRqSkOeq54VgemPTeY9mcKFXVxB6OsltL4lBkEdiyJRufSYQT_AR4S_UPdrIyWRr9dewlO7PY7VTD0hk3WXNVGBIQOZOvoTZMnLchn5FUKJah7RoUbFUo0DpZP1fVWFvd3iR_92bnXlI"
+}

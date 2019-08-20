@@ -1,0 +1,21 @@
+<resources>
+    <string name="search_icon_title">Search Doctor</string>
+    <string name="app_name">VivyDoctorSearch</string>
+    <string name="retry">Retry</string>
+    <string name="username">UserName</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="text_login">VIVY Doctor Search</string>
+
+
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
+    <string name="permission_denied_explanation">
+        Permission was denied, but is needed for core functionality.
+    </string>
+    <string name="permission_rationale">
+        Location permission is needed for core functionality
+    </string>
+    <string name="settings">Settings</string>
+</resources>

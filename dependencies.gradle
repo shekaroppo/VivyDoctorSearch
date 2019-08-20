@@ -1,0 +1,87 @@
+ext {
+
+
+    minSdkVersion = 21
+    compileSdkVersion = 29
+    targetSdkVersion = 29
+    buildToolsVersion = "29.0.0"
+
+    def versionAndroidXLifecycle = '2.0.0'
+    def versionAndroidXCardView = "1.0.0"
+    def versionAndroidXConstraintLayout = "1.1.3"
+    def versionAndroidXRecyclerView = "1.0.0"
+    def versionAndroidXAppcompat = "1.0.2"
+    def versionMaterial = "1.1.0-alpha09"
+    def versionDagger = '2.16'
+    def versionRetrofit = '2.6.1'
+    def versionOkhttp = '4.1.0'
+    def versionRxJava = '2.2.11'
+    def versionRxAndroid = '2.1.1'
+    def versionGlide = '4.9.0'
+    def versionLocation = '16.0.0'
+    def versionJunit = '4.12'
+    def versionMockito = '2.7.22'
+    def versionCoreTesting = '1.1.0'
+
+
+    def androidLibs = [kotlin              : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion],
+                       lifecycleExtensions : [group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: versionAndroidXLifecycle],
+                       lifecycleCompiler   : [group: 'androidx.lifecycle', name: 'lifecycle-compiler', version: versionAndroidXLifecycle],
+                       appCompat           : [group: 'androidx.appcompat', name: 'appcompat', version: versionAndroidXAppcompat],
+                       material            : [group: 'com.google.android.material', name: 'material', version: versionMaterial],
+                       cardview            : [group: 'androidx.cardview', name: 'cardview', version: versionAndroidXCardView],
+                       constraintLayout    : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: versionAndroidXConstraintLayout],
+                       recyclerview        : [group: 'androidx.recyclerview', name: 'recyclerview', version: versionAndroidXRecyclerView],
+                       navigationFragment  : [group: 'android.arch.navigation', name: 'navigation-fragment-ktx', version: versionNavigation],
+                       navigationFragmentUI: [group: 'android.arch.navigation', name: 'navigation-ui-ktx', version: versionNavigation],
+                       playServicesLocation: [group: 'com.google.android.gms', name: 'play-services-location', version: versionLocation]]
+
+    def libs = [dagger                   : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
+                daggerCompiler           : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
+                daggerAndroidSupport     : [group: 'com.google.dagger', name: 'dagger-android-support', version: versionDagger],
+                daggerAndroidProcessor   : [group: 'com.google.dagger', name: 'dagger-android-processor', version: versionDagger],
+                retrofit2                : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versionRetrofit],
+                converterGson            : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versionRetrofit],
+                retrofit2RxAdapter       : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: versionRetrofit],
+                okhttp3                  : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versionOkhttp],
+                okhttp3LoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versionOkhttp],
+                rxJava                   : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
+                rxAndroid                : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
+                glide                    : [group: 'com.github.bumptech.glide', name: 'glide', version: versionGlide]]
+
+    def test = [junit          : [group: 'junit', name: 'junit', version: versionJunit],
+                mockitoCore    : [group: 'org.mockito', name: 'mockito-core', version: versionMockito],
+                mockitoAndroid : [group: 'org.mockito', name: 'mockito-android', version: versionMockito],
+                mockwebserver  : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: versionOkhttp],
+                coreArchTesting: [group: 'android.arch.core', name: 'core-testing', version: versionCoreTesting]]
+
+    appDependencies = [[configuration: "implementation", dependency: androidLibs.kotlin],
+                       [configuration: "implementation", dependency: androidLibs.lifecycleExtensions],
+                       [configuration: "kapt", dependency: androidLibs.lifecycleCompiler],
+                       [configuration: "implementation", dependency: androidLibs.appCompat],
+                       [configuration: "implementation", dependency: androidLibs.material],
+                       [configuration: "implementation", dependency: androidLibs.cardview],
+                       [configuration: "implementation", dependency: androidLibs.constraintLayout],
+                       [configuration: "implementation", dependency: androidLibs.recyclerview],
+                       [configuration: "implementation", dependency: androidLibs.navigationFragment],
+                       [configuration: "implementation", dependency: androidLibs.navigationFragmentUI],
+                       [configuration: "implementation", dependency: androidLibs.playServicesLocation],
+                       [configuration: "implementation", dependency: libs.dagger],
+                       [configuration: "implementation", dependency: libs.daggerAndroidSupport],
+                       [configuration: "kapt", dependency: libs.daggerCompiler],
+                       [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+                       [configuration: "implementation", dependency: libs.retrofit2],
+                       [configuration: "implementation", dependency: libs.converterGson],
+                       [configuration: "implementation", dependency: libs.retrofit2RxAdapter],
+                       [configuration: "implementation", dependency: libs.okhttp3],
+                       [configuration: "implementation", dependency: libs.okhttp3LoggingInterceptor],
+                       [configuration: "implementation", dependency: libs.rxJava],
+                       [configuration: "implementation", dependency: libs.rxAndroid],
+                       [configuration: "implementation", dependency: libs.glide],
+                       [configuration: 'testImplementation', dependency: test.junit],
+                       [configuration: 'testImplementation', dependency: test.mockitoCore],
+                       [configuration: 'androidTestImplementation', dependency: test.mockitoAndroid],
+                       [configuration: 'testImplementation', dependency: test.mockwebserver],
+                       [configuration: 'testImplementation', dependency: test.coreArchTesting]]
+}
+
