@@ -1,7 +1,8 @@
 package com.vivy.utils
 
 object Constants {
-    const val BASE_URL = "https://api.staging.vivy.com"
+    // const val BASE_URL = "https://api.staging.vivy.com"
+    const val BASE_URL = "https://api.jsonbin.io/b/"
     const val OATH_URL = "https://auth.staging.vivy.com"
     const val USER_NAME = "androidChallenge@vivy.com"
     const val PASSWORD = "88888888"

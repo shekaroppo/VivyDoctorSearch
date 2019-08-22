@@ -3,13 +3,13 @@ package com.vivy.ui.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vivy.data.model.Doctor
+import com.vivy.data.model.Restaurant
 import com.vivy.databinding.ItemSearchBinding
 
-class SearchAdapter(private var doctors: ArrayList<Doctor>,
+class SearchAdapter(private var doctors: ArrayList<Restaurant>,
                     private val eventHandler: SearchEventHandler) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
-    fun updateData(doctors: List<Doctor>) {
+    fun updateData(doctors: List<Restaurant>) {
         this.doctors.addAll(doctors)
         notifyDataSetChanged()
     }
@@ -33,7 +33,7 @@ class SearchAdapter(private var doctors: ArrayList<Doctor>,
     }
 
     inner class SearchViewHolder(private val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(doctor: Doctor, eventHandler: SearchEventHandler) {
+        fun bind(doctor: Restaurant, eventHandler: SearchEventHandler) {
             binding.doctorModel = doctor
             binding.eventHandler = eventHandler
             binding.executePendingBindings()

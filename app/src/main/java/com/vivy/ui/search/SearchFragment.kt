@@ -9,21 +9,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.vivy.R
-import com.vivy.data.model.SearchResultResponse
-import com.vivy.data.provider.LocationProvider
+import com.vivy.data.model.RestaurantResponse
 import com.vivy.databinding.FragmentSearchBinding
 import com.vivy.ui.base.BaseFragment
-import com.vivy.utils.Constants
 import com.vivy.utils.DataWrapper
 import javax.inject.Inject
 
 
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
-
-    @Inject
-    lateinit var locationProvider: LocationProvider
 
     @Inject
     lateinit var searchAdapter: SearchAdapter
@@ -39,29 +33,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override fun getViewModelClass() = SearchViewModel::class.java
 
-    val latLongListenere = object : LatLongListener {
-        override fun onLatLongReceived(lat: Double, long: Double) {
-            Constants.LATITUDE = lat
-            Constants.LONGITUDE = long
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        locationProvider.setListener(latLongListenere)
-        if (!locationProvider.checkPermissions()) {
-            locationProvider.requestPermissions()
-        } else {
-            locationProvider.getLastLocation()
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        locationProvider.onRequestPermissionsResult(requestCode, grantResults)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeUI()
@@ -74,20 +45,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(activity)
             adapter = searchAdapter
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    val visibleItemCount = layoutManager?.childCount!!
-                    val totalItemCount = layoutManager?.itemCount!!
-                    val firstVisibleItemPosition = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-
-                    if (!viewModel.bottomProgressBar.value!! && lastKey != null) {
-                        if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition > 0) {
-                            viewModel.loadMore(lastKey!!, binding.query!!)
-                        }
-                    }
-                }
-            })
         }
     }
 
@@ -97,13 +54,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         viewModel.searchMutableLiveData.observe(this, subscribersObserver())
     }
 
-    private fun subscribersObserver(): Observer<DataWrapper<SearchResultResponse>> {
+    private fun subscribersObserver(): Observer<DataWrapper<RestaurantResponse>> {
         return Observer {
             viewModel.displayLoader(false)
             it?.let {
                 if (!it.isError) {
-                    lastKey = it.data?.lastKey
-                    searchAdapter.updateData(it.data?.doctors!!)
+                    searchAdapter.updateData(it.data!!.restaurants)
                     viewModel.bottomProgressBar.value = false
                 } else {
                     viewModel.setErrorMessage(it.isError, it.errorMessage)
@@ -143,11 +99,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private fun searchDoctors(query: String) {
         searchAdapter.clear()
         binding.query = query
-        viewModel.searchDoctors(query)
+        //  viewModel.searchDoctors(query)
     }
 
-}
-
-interface LatLongListener {
-    fun onLatLongReceived(lat: Double, long: Double)
 }

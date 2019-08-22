@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.vivy.injection.scope.ActivityScope
 import com.vivy.ui.home.HomeActivity
 import com.vivy.ui.home.HomeActivityModule
-import com.vivy.ui.login.LoginActivity
-import com.vivy.ui.login.LoginActivityModule
 import com.vivy.utils.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -20,11 +18,6 @@ abstract class ActivityBuilder {
     @ContributesAndroidInjector(
             modules = [(HomeActivityModule::class), (FragmentBuilder::class)])
     internal abstract fun bindHomeActivity(): HomeActivity
-
-    @ActivityScope
-    @ContributesAndroidInjector(
-            modules = [(LoginActivityModule::class)])
-    internal abstract fun bindLoginActivity(): LoginActivity
 }
 
 

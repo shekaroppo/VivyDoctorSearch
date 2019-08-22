@@ -1,19 +1,22 @@
 package com.vivy.data.model
 
-import com.google.gson.annotations.SerializedName
-
-data class LoginResponse(
-        @SerializedName("access_token")
-        val accessToken: String
+data class RestaurantResponse(
+        val restaurants: List<Restaurant>
 )
 
-data class SearchResultResponse(
-        val doctors: List<Doctor>,
-        val lastKey: String
+data class Restaurant(
+        val name: String,
+        val sortingValues: SortingValues,
+        val status: String
 )
 
-data class Doctor(
-        val address: String,
-        val id: String?,
-        val name: String
+data class SortingValues(
+        val averageProductPrice: Int,
+        val bestMatch: Int,
+        val deliveryCosts: Int,
+        val distance: Int,
+        val minCost: Int,
+        val newest: Int,
+        val popularity: Int,
+        val ratingAverage: Double
 )
