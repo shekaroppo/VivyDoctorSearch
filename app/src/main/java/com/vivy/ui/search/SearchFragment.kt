@@ -1,8 +1,6 @@
 package com.vivy.ui.search
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -17,7 +15,6 @@ import com.vivy.data.model.SearchResultResponse
 import com.vivy.data.provider.LocationProvider
 import com.vivy.databinding.FragmentSearchBinding
 import com.vivy.ui.base.BaseFragment
-import com.vivy.ui.home.HomeActivity
 import com.vivy.utils.Constants
 import com.vivy.utils.DataWrapper
 import javax.inject.Inject
@@ -25,14 +22,14 @@ import javax.inject.Inject
 
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
-//    @Inject
-//    lateinit var locationProvider: LocationProvider
+    @Inject
+    lateinit var locationProvider: LocationProvider
+
     @Inject
     lateinit var searchAdapter: SearchAdapter
+
     @Inject
     lateinit var eventHandler: SearchEventHandler
-
-    //private lateinit var locationProvider: LocationProvider
 
     private lateinit var searchView: SearchView
 
@@ -42,28 +39,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override fun getViewModelClass() = SearchViewModel::class.java
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        locationProvider = LocationProvider(context as HomeActivity, object : LatLongListener {
-//            override fun onLatLongReceived(lat: Double, long: Double) {
-//                Constants.LATITUDE = lat
-//                Constants.LONGITUDE = long
-//            }
-//        })
+    val latLongListenere = object : LatLongListener {
+        override fun onLatLongReceived(lat: Double, long: Double) {
+            Constants.LATITUDE = lat
+            Constants.LONGITUDE = long
+        }
     }
 
     override fun onStart() {
         super.onStart()
-//        if (!locationProvider.checkPermissions()) {
-//            locationProvider.requestPermissions()
-//        } else {
-//            locationProvider.getLastLocation()
-//        }
+        locationProvider.setListener(latLongListenere)
+        if (!locationProvider.checkPermissions()) {
+            locationProvider.requestPermissions()
+        } else {
+            locationProvider.getLastLocation()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-      //  locationProvider.onRequestPermissionsResult(requestCode, grantResults)
+        locationProvider.onRequestPermissionsResult(requestCode, grantResults)
     }
 
 
@@ -100,7 +95,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         binding.searchViewModel = viewModel
         binding.eventHandler = eventHandler
         viewModel.searchMutableLiveData.observe(this, subscribersObserver())
-        binding.setLifecycleOwner(this)
     }
 
     private fun subscribersObserver(): Observer<DataWrapper<SearchResultResponse>> {
