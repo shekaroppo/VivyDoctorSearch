@@ -25,12 +25,14 @@ import javax.inject.Inject
 
 class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
+//    @Inject
+//    lateinit var locationProvider: LocationProvider
     @Inject
     lateinit var searchAdapter: SearchAdapter
     @Inject
     lateinit var eventHandler: SearchEventHandler
 
-    private lateinit var locationProvider: LocationProvider
+    //private lateinit var locationProvider: LocationProvider
 
     private lateinit var searchView: SearchView
 
@@ -42,26 +44,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        locationProvider = LocationProvider(context as HomeActivity, object : LatLongListener {
-            override fun onLatLongReceived(lat: Double, long: Double) {
-                Constants.LATITUDE = lat
-                Constants.LONGITUDE = long
-            }
-        })
+//        locationProvider = LocationProvider(context as HomeActivity, object : LatLongListener {
+//            override fun onLatLongReceived(lat: Double, long: Double) {
+//                Constants.LATITUDE = lat
+//                Constants.LONGITUDE = long
+//            }
+//        })
     }
 
     override fun onStart() {
         super.onStart()
-        if (!locationProvider.checkPermissions()) {
-            locationProvider.requestPermissions()
-        } else {
-            locationProvider.getLastLocation()
-        }
+//        if (!locationProvider.checkPermissions()) {
+//            locationProvider.requestPermissions()
+//        } else {
+//            locationProvider.getLastLocation()
+//        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        locationProvider.onRequestPermissionsResult(requestCode, grantResults)
+      //  locationProvider.onRequestPermissionsResult(requestCode, grantResults)
     }
 
 

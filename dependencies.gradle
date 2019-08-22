@@ -12,7 +12,7 @@ ext {
     def versionAndroidXRecyclerView = "1.0.0"
     def versionAndroidXAppcompat = "1.0.2"
     def versionMaterial = "1.1.0-alpha09"
-    def versionDagger = '2.16'
+    def versionDagger = '2.23.2'
     def versionRetrofit = '2.6.1'
     def versionOkhttp = '4.1.0'
     def versionRxJava = '2.2.11'

@@ -1,5 +1,7 @@
 package com.vivy.ui.search
 
+import android.content.Context
+import com.vivy.data.provider.LocationProvider
 import dagger.Module
 import dagger.Provides
 
@@ -14,5 +16,10 @@ class SearchFragmentModule {
     fun provideSearchEventHandler(): SearchEventHandler {
         return SearchEventHandler()
     }
+
+//    @Provides
+//    fun provideLocationProvider(context: Context): LocationProvider {
+//        return LocationProvider(context)
+//    }
 
 }

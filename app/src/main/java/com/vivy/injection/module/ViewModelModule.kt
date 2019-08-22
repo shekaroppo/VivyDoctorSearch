@@ -14,20 +14,20 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelModule {
 
-    @Binds
-    @IntoMap
-    @ViewModelScope(HomeViewModel::class)
-    abstract fun bindHomeModel(homeViewModel: HomeViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelScope(LoginViewModel::class)
-    abstract fun bindLoginModel(loginViewModel: LoginViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelScope(SearchViewModel::class)
-    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelScope(HomeViewModel::class)
+//    abstract fun bindHomeModel(homeViewModel: HomeViewModel): ViewModel
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelScope(LoginViewModel::class)
+//    abstract fun bindLoginModel(loginViewModel: LoginViewModel): ViewModel
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelScope(SearchViewModel::class)
+//    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
