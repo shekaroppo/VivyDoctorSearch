@@ -7,9 +7,9 @@
 
     <fragment
             android:id="@+id/searchFragment"
-            android:name="com.vivy.ui.search.SearchFragment"
+            android:name="com.takeaway.ui.restaurantlist.RestaurantListFragment"
             android:label="Search Fragment"
-            tools:layout="@layout/fragment_search">
+            tools:layout="@layout/fragment_restaurant_list">
     </fragment>
 
 </navigation>

@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/sorting_group"
+        android:checkableBehavior="single">
+        <item
+            android:checkable="false"
+            android:enabled="false"
+            android:title="@string/select_sorting_filter" />
+        <item
+            android:id="@+id/min_cost"
+            android:title="@string/minimum_cost" />
+        <item
+            android:id="@+id/delivery_costs"
+            android:title="@string/delivery_costs" />
+        <item
+            android:id="@+id/avg_prod_price"
+            android:title="@string/avg_product_price" />
+        <item
+            android:id="@+id/popularity"
+            android:title="@string/popularity" />
+        <item
+            android:id="@+id/distance"
+            android:title="@string/distance" />
+        <item
+            android:id="@+id/rating_avg"
+            android:title="@string/rating_average" />
+        <item
+            android:id="@+id/newest"
+            android:title="@string/newest" />
+        <item
+            android:id="@+id/best_match"
+            android:title="@string/best_match" />
+    </group>
     <item
-            android:id="@+id/menu_search"
-            app:showAsAction="always|collapseActionView"
-            android:icon="@drawable/ic_search"
-            android:title="@string/search_icon_title"
-            app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search_icon_title"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
 </menu>

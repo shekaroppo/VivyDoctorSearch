@@ -22,6 +22,7 @@ ext {
     def versionJunit = '4.12'
     def versionMockito = '2.7.22'
     def versionCoreTesting = '1.1.0'
+    def versionRoom = '2.1.0'
 
 
     def androidLibs = [kotlin              : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion],
@@ -30,6 +31,9 @@ ext {
                        appCompat           : [group: 'androidx.appcompat', name: 'appcompat', version: versionAndroidXAppcompat],
                        material            : [group: 'com.google.android.material', name: 'material', version: versionMaterial],
                        cardview            : [group: 'androidx.cardview', name: 'cardview', version: versionAndroidXCardView],
+                       roomRuntime         : [group: 'androidx.room', name: 'room-runtime', version: versionRoom],
+                       roomCompiler        : [group: 'androidx.room', name: 'room-compiler', version: versionRoom],
+                       roomTesting         : [group: 'androidx.room', name: 'room-testing', version: versionRoom],
                        constraintLayout    : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: versionAndroidXConstraintLayout],
                        recyclerview        : [group: 'androidx.recyclerview', name: 'recyclerview', version: versionAndroidXRecyclerView],
                        navigationFragment  : [group: 'android.arch.navigation', name: 'navigation-fragment-ktx', version: versionNavigation],
@@ -61,6 +65,9 @@ ext {
                        [configuration: "implementation", dependency: androidLibs.appCompat],
                        [configuration: "implementation", dependency: androidLibs.material],
                        [configuration: "implementation", dependency: androidLibs.cardview],
+                       [configuration: "implementation", dependency: androidLibs.roomRuntime],
+                       [configuration: "annotationProcessor", dependency: androidLibs.roomCompiler],
+                       [configuration: "androidTestImplementation", dependency: androidLibs.roomTesting],
                        [configuration: "implementation", dependency: androidLibs.constraintLayout],
                        [configuration: "implementation", dependency: androidLibs.recyclerview],
                        [configuration: "implementation", dependency: androidLibs.navigationFragment],

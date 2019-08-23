@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_item_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_margin_horizontal"
+        android:layout_marginTop="@dimen/card_margin_vertical"
+        android:layout_marginEnd="@dimen/card_margin_horizontal"
+        android:layout_marginBottom="@dimen/card_margin_vertical"
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        tools:cardCornerRadius="@dimen/card_recycler_corner_radius"
+        tools:cardElevation="@dimen/card_recycler_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/text_margin">
+
+            <CheckBox
+                android:id="@+id/fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:button="@drawable/fill_in_heart"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/fav"
+                android:padding="16dp"
+                android:textSize="16sp"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@{restaurant.name??` `}"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Test" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingbarDefault"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginTop="@dimen/text_margin_very_small"
+                android:numStars="@{5}"
+                bind:rating="@{restaurant.sortingValues.ratingAverage}" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="eventHandler"
+            type="com.takeaway.ui.restaurantlist.RestaurantListEventHandler" />
+
+        <variable
+            name="restaurant"
+            type="com.takeaway.data.model.Restaurant" />
+    </data>
+</layout>

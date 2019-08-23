@@ -1,12 +1,21 @@
 <resources>
-    <string name="search_icon_title">Search Doctor</string>
-    <string name="app_name">VivyDoctorSearch</string>
+    <string name="search_icon_title">Search Restaurant</string>
+    <string name="app_name">Takeaway-Restaurant</string>
     <string name="retry">Retry</string>
     <string name="username">UserName</string>
     <string name="password">password</string>
     <string name="login">Login</string>
-    <string name="text_login">VIVY Doctor Search</string>
-
+    <string name="restaurant_sorting_label">%1s : %2s</string>
+    <string name="minimum_cost">Min_Cost</string>
+    <string name="delivery_costs">Delivery_Costs</string>
+    <string name="avg_product_price">Avg_Prod_Price</string>
+    <string name="popularity">Popularity</string>
+    <string name="distance">Distance</string>
+    <string name="rating_average">Rating_Avg</string>
+    <string name="newest">Newest</string>
+    <string name="best_match">Best_Match</string>
+    <string name="select_sorting_filter">Select Sorting Filter</string>
+    <string name="no_internet">Internet connection seems broken</string>
 
     <string name="no_location_detected">
         No location detected. Make sure location is enabled on the device.
@@ -18,4 +27,7 @@
         Location permission is needed for core functionality
     </string>
     <string name="settings">Settings</string>
+    <string name="heart">
+    M25.119,2.564c12.434,0.023,18.68,5.892,24.88,17.612  c6.2-11.721,12.446-17.589,24.877-17.612c13.81-0.025,25.035,10.575,25.061,23.66c0.033,23.708-24.952,47.46-49.938,71.212  C25.016,73.685,0.03,49.932,0.064,26.224C0.085,13.14,11.309,2.539,25.119,2.564z
+  </string>
 </resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="restaurantListViewModel"
+            type="com.takeaway.ui.restaurantlist.RestaurantListViewModel" />
+
+        <variable
+            name="eventHandler"
+            type="com.takeaway.ui.restaurantlist.RestaurantListEventHandler" />
+
+        <variable
+            name="query"
+            type="String" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        style="@style/match">
+
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/block"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{(restaurantListViewModel.isError||restaurantListViewModel.loader) ? View.GONE: View.VISIBLE}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                style="@style/match"
+                android:layout_above="@+id/bottomProgressBar"
+                android:layout_marginTop="?attr/actionBarSize" />
+
+            <ProgressBar
+                android:id="@+id/bottomProgressBar"
+                style="@style/block"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:indeterminate="true"
+                android:padding="3dp"
+                android:visibility="@{restaurantListViewModel.showBottomProgressBar? View.VISIBLE: View.GONE}" />
+        </RelativeLayout>
+
+        <LinearLayout
+            style="@style/block"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{restaurantListViewModel.isError ? View.VISIBLE: View.GONE}">
+
+            <TextView
+                android:id="@+id/text_view_error_msg"
+                style="@style/wrap"
+                android:layout_gravity="center_horizontal"
+                android:text="@{restaurantListViewModel.errorMessage}"
+                android:textAlignment="center"
+                tools:text="No Data has loaded" />
+
+            <Button
+                android:id="@+id/retry"
+                style="@style/wrap"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:onClick="@{(view) -> eventHandler.onRetrySearch(restaurantListViewModel,query)}"
+                android:text="@string/retry" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:visibility="@{restaurantListViewModel.loader ? View.VISIBLE: View.GONE}"
+            tools:visibility="visible" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
