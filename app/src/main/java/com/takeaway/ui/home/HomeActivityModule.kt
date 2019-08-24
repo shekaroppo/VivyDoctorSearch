@@ -17,10 +17,12 @@ abstract class HomeActivityModule {
     @ViewModelScope(HomeViewModel::class)
     abstract fun bindHomeModel(homeViewModel: HomeViewModel): ViewModel
 
-    @Module
-    abstract class HomeModuleBinds {
-        @Binds
-        @ActivityScope
-        abstract fun bindContext(activity: HomeActivity): Context
-    }
+
+}
+
+@Module
+abstract class HomeModuleBinds {
+    @Binds
+    @ActivityScope
+    abstract fun bindContext(activity: HomeActivity): Context
 }

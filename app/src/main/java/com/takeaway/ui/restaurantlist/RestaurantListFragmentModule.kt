@@ -1,6 +1,7 @@
 package com.takeaway.ui.restaurantlist
 
 import androidx.lifecycle.ViewModel
+import com.takeaway.data.db.LocalDataSource
 import com.takeaway.injection.scope.ViewModelScope
 import dagger.Binds
 import dagger.Module
@@ -11,13 +12,18 @@ import dagger.multibindings.IntoMap
 class RestaurantListFragmentModule {
 
     @Provides
-    fun provideSearchAdapter(restaurantListEventHandler: RestaurantListEventHandler): RestaurantListAdapter {
+    fun provideRestaurantListAdapter(restaurantListEventHandler: RestaurantListEventHandler): RestaurantListAdapter {
         return RestaurantListAdapter(arrayListOf(), restaurantListEventHandler)
     }
 
     @Provides
-    fun provideSearchEventHandler(): RestaurantListEventHandler {
-        return RestaurantListEventHandler()
+    fun provideRestaurantEventHandler(): RestaurantEventHandler {
+        return RestaurantEventHandler()
+    }
+
+    @Provides
+    fun provideRestaurantListEventHandler(localDataSource: LocalDataSource): RestaurantListEventHandler {
+        return RestaurantListEventHandler(localDataSource)
     }
 }
 
@@ -26,5 +32,5 @@ abstract class RestaurantListFragmentBinds {
     @Binds
     @IntoMap
     @ViewModelScope(RestaurantListViewModel::class)
-    abstract fun bindSearchViewModel(restaurantListViewModel: RestaurantListViewModel): ViewModel
+    abstract fun bindRestaurantListViewModel(restaurantListViewModel: RestaurantListViewModel): ViewModel
 }

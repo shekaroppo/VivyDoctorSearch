@@ -1,13 +1,23 @@
 package com.takeaway.data.model
 
+import androidx.annotation.NonNull
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class RestaurantResponse(
         val restaurants: List<Restaurant>
 )
 
+@Entity(tableName = "restaurants")
 data class Restaurant(
+        @PrimaryKey
+        @NonNull
         val name: String,
+        @Embedded
         val sortingValues: SortingValues,
-        val status: String
+        val status: String,
+        var favourite: Boolean = false
 )
 
 data class SortingValues(
@@ -20,3 +30,10 @@ data class SortingValues(
         val popularity: Int,
         val ratingAverage: Double
 )
+
+@Entity(tableName = "favourites")
+data class Favourite(@field:PrimaryKey
+                     @field:NonNull
+                     var restaurantName: String?)
+
+

@@ -23,7 +23,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     lateinit var restaurantListAdapter: RestaurantListAdapter
 
     @Inject
-    lateinit var eventHandler: RestaurantListEventHandler
+    lateinit var eventHandler: RestaurantEventHandler
 
     private lateinit var searchView: SearchView
 

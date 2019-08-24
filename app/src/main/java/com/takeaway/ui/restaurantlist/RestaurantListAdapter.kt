@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.takeaway.data.model.Restaurant
 import com.takeaway.databinding.ItemRestaurantBinding
-import kotlin.math.roundToInt
 
 class RestaurantListAdapter(private var restaurant: ArrayList<Restaurant>,
                             private val eventHandler: RestaurantListEventHandler) : RecyclerView.Adapter<RestaurantListAdapter.SearchViewHolder>() {
