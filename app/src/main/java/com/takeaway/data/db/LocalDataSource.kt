@@ -61,7 +61,7 @@
 //
 //    fun save(restaurantResponse: RestaurantResponse): Single<RestaurantResponse> {
 //        return Single.fromCallable {
-//            restaurantDao.insertAll(restaurantResponse.restaurants)
+//            restaurantDao.insertRestaurants(restaurantResponse.restaurants)
 //            setFavourites()
 //            restaurantResponse
 //        }

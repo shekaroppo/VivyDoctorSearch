@@ -8,5 +8,4 @@
     <dimen name="text_margin_very_small">4dp</dimen>
     <dimen name="heart_size">24sp</dimen>
 
-    <dimen name="avatar_size">56dp</dimen>
 </resources>

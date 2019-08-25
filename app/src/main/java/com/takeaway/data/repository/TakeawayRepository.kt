@@ -15,10 +15,10 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
                                              private val database: RestaurantDatabase) : BaseRepository() {
 
     suspend fun getRestaurants(): List<Restaurant> {
-        val favourites = database.restaurantDao().favouriteRestaurantNames()
+        val favourites = database.restaurantDao().getFavouriteRestaurantNames()
         val restaurants = apiService.getRestaurants().restaurants
         val restaurantsWithFav = updateFavourites(favourites, restaurants)
-        database.restaurantDao().insertAll(restaurantsWithFav)
+        database.restaurantDao().insertRestaurants(restaurantsWithFav)
         return restaurantsWithFav
     }
 

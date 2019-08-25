@@ -83,7 +83,7 @@
 //
 //    fun save(restaurants: List<Restaurant>): Observable<List<Restaurant>> {
 //        return Observable.fromCallable {
-//            restaurantDao.insertAll(restaurants)
+//            restaurantDao.insertRestaurants(restaurants)
 //            setFavourites()
 //            restaurants
 //        }
