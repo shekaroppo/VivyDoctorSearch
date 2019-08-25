@@ -7,6 +7,6 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("5d5d37e34acbd77681dce3c2")
-    fun getRestaurants(): Single<RestaurantResponse>
+    suspend fun getRestaurants(): RestaurantResponse
 
 }

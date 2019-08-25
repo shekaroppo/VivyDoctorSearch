@@ -1,26 +1,41 @@
 package com.takeaway.data.repository
 
-import androidx.lifecycle.MutableLiveData
-import com.takeaway.data.model.*
+import com.takeaway.data.db.RestaurantDatabase
+import com.takeaway.data.model.Favourite
+import com.takeaway.data.model.Restaurant
 import com.takeaway.data.services.ApiService
-import com.takeaway.utils.CompositeDisposableProvider
-import com.takeaway.utils.DataWrapper
-import com.takeaway.utils.onBackground
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class TakeawayRepository @Inject constructor(private val apiService: ApiService,
-                                             private val disposableProvider: CompositeDisposableProvider) : BaseRepository(disposableProvider) {
+                                             private val database: RestaurantDatabase) : BaseRepository() {
 
-    fun getRestaurants(searchMutableLiveData: MutableLiveData<DataWrapper<RestaurantResponse>>) {
+    suspend fun getRestaurants(): List<Restaurant> {
+        val favourites = database.restaurantDao().favouriteRestaurantNames()
+        val restaurants = apiService.getRestaurants().restaurants
+        val restaurantsWithFav = updateFavourites(favourites, restaurants)
+        database.restaurantDao().insertAll(restaurantsWithFav)
+        return restaurantsWithFav
+    }
 
-        disposableProvider.get().add(apiService.getRestaurants()
-                .onBackground()
-                .subscribe({ response ->
-                    searchMutableLiveData.postValue(DataWrapper(data = response))
-                }, {
-                    searchMutableLiveData.postValue(DataWrapper(isError = true, errorMessage = it.message!!))
-                }))
+    private fun updateFavourites(favourites: List<String>, restaurants: List<Restaurant>): List<Restaurant> {
+        for (restaurant in restaurants) {
+            if (favourites.contains(restaurant.name)) {
+                restaurant.favourite = true
+            }
+        }
+        return restaurants
+    }
+
+    fun addToFavorite(favourite: Favourite) {
+        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().addToFavorite(favourite) }
+    }
+
+    fun removeFromFavourite(favourite: Favourite) {
+        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().removeFromFavourite(favourite) }
     }
 }

@@ -34,6 +34,6 @@ data class SortingValues(
 @Entity(tableName = "favourites")
 data class Favourite(@field:PrimaryKey
                      @field:NonNull
-                     var restaurantName: String?)
+                     var restaurantName: String)
 
 

@@ -16,11 +16,20 @@ import io.reactivex.Single
 @Dao
 interface RestaurantDao {
 
-    @get:Query("SELECT * FROM restaurants")
-    val all: List<Restaurant>
+    @Query("SELECT * FROM restaurants")
+    suspend fun getRestaurants(): List<Restaurant>
 
-    @get:Query("SELECT * FROM favourites")
-    val favourites: List<Favourite>
+    @Query("SELECT restaurantName FROM favourites")
+    suspend fun favouriteRestaurantNames(): List<String>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(restaurants: List<Restaurant>)
+
+    @Update
+    suspend fun update(restaurant: Restaurant)
+
+    @Query("SELECT * FROM favourites")
+    suspend fun favourites(): List<Favourite>
 
     @Query("SELECT * FROM restaurants WHERE name LIKE :name")
     fun searchByName(name: String): Single<List<Restaurant>>
@@ -29,14 +38,8 @@ interface RestaurantDao {
     fun getByName(name: String): Restaurant
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addToFavorite(favourite: Favourite)
+    suspend fun addToFavorite(favourite: Favourite)
 
     @Delete
-    fun removeFromFavourite(favourite: Favourite)
-
-    @Update
-    fun update(restaurant: Restaurant)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(restaurants: List<Restaurant>)
+    suspend fun removeFromFavourite(favourite: Favourite)
 }

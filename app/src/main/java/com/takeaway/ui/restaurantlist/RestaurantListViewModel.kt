@@ -1,21 +1,22 @@
 package com.takeaway.ui.restaurantlist
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.takeaway.data.model.RestaurantResponse
+import androidx.lifecycle.viewModelScope
+import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.ui.base.BaseViewModel
 import com.takeaway.utils.Constants
-import com.takeaway.utils.DataWrapper
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RestaurantListViewModel @Inject constructor(private val takeawayRepository: TakeawayRepository) : BaseViewModel() {
-    var searchMutableLiveData = MutableLiveData<DataWrapper<RestaurantResponse>>()
 
-    var bottomProgressBar = MutableLiveData<Boolean>().apply { postValue(false) }
+    val restaurantsMutableLiveData = MutableLiveData<List<Restaurant>>()
 
-    val showBottomProgressBar: LiveData<Boolean>
-        get() = bottomProgressBar
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception -> onError(exception) }
 
     init {
         getRestaurants()
@@ -24,11 +25,20 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
     fun getRestaurants() {
         setErrorMessage(false, Constants.EMPTY_MESSAGE)
         displayLoader(true)
-        takeawayRepository.getRestaurants(searchMutableLiveData)
+        viewModelScope.launch(coroutineExceptionHandler) {
+            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
+                takeawayRepository.getRestaurants()
+            }
+            withContext(Dispatchers.Main + coroutineExceptionHandler) {
+                displayLoader(false)
+                restaurantsMutableLiveData.postValue(restaurants)
+            }
+        }
     }
 
-    override fun onCleared() {
-        takeawayRepository.dispose()
-        super.onCleared()
+    private fun onError(exception: Throwable) {
+        displayLoader(false)
+        setErrorMessage(true, exception.message!!)
     }
+
 }

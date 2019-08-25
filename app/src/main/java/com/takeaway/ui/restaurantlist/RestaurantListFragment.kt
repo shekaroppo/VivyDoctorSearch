@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takeaway.R
+import com.takeaway.data.model.Restaurant
 import com.takeaway.data.model.RestaurantResponse
 import com.takeaway.databinding.FragmentRestaurantListBinding
 import com.takeaway.ui.base.BaseFragment
@@ -26,8 +27,6 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     lateinit var eventHandler: RestaurantEventHandler
 
     private lateinit var searchView: SearchView
-
-    private var lastKey: String? = ""
 
     override fun layoutId() = R.layout.fragment_restaurant_list
 
@@ -51,21 +50,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     private fun subscribeToModel() {
         binding.restaurantListViewModel = viewModel
         binding.eventHandler = eventHandler
-        viewModel.searchMutableLiveData.observe(this, subscribersObserver())
-    }
-
-    private fun subscribersObserver(): Observer<DataWrapper<RestaurantResponse>> {
-        return Observer {
-            viewModel.displayLoader(false)
-            it?.let {
-                if (!it.isError) {
-                    restaurantListAdapter.updateData(it.data!!.restaurants)
-                    viewModel.bottomProgressBar.value = false
-                } else {
-                    viewModel.setErrorMessage(it.isError, it.errorMessage)
-                }
-            }
-        }
+        viewModel.restaurantsMutableLiveData.observe(this, Observer { restaurantListAdapter.updateData(it) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -96,7 +81,6 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     }
 
     private fun getRestaurant(query: String) {
-        restaurantListAdapter.clear()
         binding.query = query
         //  viewModel.getRestaurant(query)
     }

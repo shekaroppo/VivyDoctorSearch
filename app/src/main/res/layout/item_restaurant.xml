@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
@@ -32,6 +32,7 @@
                 android:layout_gravity="center"
                 android:background="@null"
                 android:button="@drawable/fill_in_heart"
+                android:checked="@{restaurant.favourite}"
                 android:gravity="center" />
 
             <TextView
@@ -63,7 +64,7 @@
                 android:layout_below="@id/name"
                 android:layout_marginTop="@dimen/text_margin_very_small"
                 android:numStars="@{5}"
-                bind:rating="@{restaurant.sortingValues.ratingAverage}" />
+                apps:rating="@{restaurant.sortingValues.ratingAverage}" />
 
 
         </RelativeLayout>
@@ -72,10 +73,6 @@
     <data>
 
         <import type="android.view.View" />
-
-        <variable
-            name="eventHandler"
-            type="com.takeaway.ui.restaurantlist.RestaurantListEventHandler" />
 
         <variable
             name="restaurant"

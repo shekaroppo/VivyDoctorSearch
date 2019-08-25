@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -38,26 +39,11 @@
             android:visibility="@{restaurantListViewModel.loader ? View.VISIBLE: View.GONE}"
             tools:visibility="visible" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{(restaurantListViewModel.isError||restaurantListViewModel.loader) ? View.GONE: View.VISIBLE}">
-
-            <ProgressBar
-                android:id="@+id/bottomProgressBar"
-                style="@style/block"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:indeterminate="true"
-                android:padding="3dp"
-                android:visibility="@{restaurantListViewModel.showBottomProgressBar? View.VISIBLE: View.GONE}" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                style="@style/match"
-                android:layout_above="@+id/bottomProgressBar"
-                android:layout_marginTop="?attr/actionBarSize" />
-        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/match"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:visibility="@{(restaurantListViewModel.isError||restaurantListViewModel.loader) ? View.GONE: View.VISIBLE}" />
 
         <com.google.android.material.appbar.AppBarLayout
             style="@style/block"
