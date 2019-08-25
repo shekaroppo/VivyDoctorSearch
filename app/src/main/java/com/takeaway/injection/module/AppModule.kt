@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.takeaway.TakeawayApplication
-import com.takeaway.data.Where2EatPreferences
+import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.db.RestaurantDatabase
 import dagger.Binds
 import dagger.Module
@@ -21,9 +21,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    internal fun provideSharedPreferences(application: Application): Where2EatPreferences {
+    internal fun provideSharedPreferences(application: Application): TakeawayPreferences {
         val pref = application.getSharedPreferences("where2eatPref", Context.MODE_PRIVATE)
-        return Where2EatPreferences(pref)
+        return TakeawayPreferences(pref)
     }
 }
 

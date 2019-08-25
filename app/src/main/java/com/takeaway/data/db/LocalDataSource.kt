@@ -1,6 +1,6 @@
 //package com.takeaway.data.db
 //
-//import com.takeaway.data.Where2EatPreferences
+//import com.takeaway.data.TakeawayPreferences
 //import com.takeaway.data.model.Favourite
 //import com.takeaway.data.model.Restaurant
 //import com.takeaway.data.model.RestaurantResponse
@@ -10,7 +10,7 @@
 //
 //import javax.inject.Inject
 //
-//class LocalDataSource(database: RestaurantDatabase, private val preferences: Where2EatPreferences) {
+//class LocalDataSource(database: RestaurantDatabase, private val preferences: TakeawayPreferences) {
 //
 //    private val restaurantDao = database.restaurantDao()
 //
@@ -54,7 +54,7 @@
 //    //        return Observable.just(restaurants);
 //    //    }
 //    //
-//    //    public Observable<List<Restaurant>> getRestaurantsSorted(Where2EatPreferences.SortType sortType) {
+//    //    public Observable<List<Restaurant>> getRestaurantsSorted(TakeawayPreferences.SortType sortType) {
 //    //        preferences.setSortType(sortType);
 //    //        return getRestaurantsSorted();
 //    //    }
@@ -95,7 +95,7 @@
 //    //        return restaurantDao.searchByName(query).toObservable();
 //    //    }
 //    //
-//    //    public Where2EatPreferences getPreferences() {
+//    //    public TakeawayPreferences getPreferences() {
 //    //        return preferences;
 //    //    }
 //    //

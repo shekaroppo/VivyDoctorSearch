@@ -2,7 +2,7 @@
 //
 //import android.database.Cursor
 //
-//import com.mert.where2eat.data.Where2EatPreferences
+//import com.mert.where2eat.data.TakeawayPreferences
 //import com.mert.where2eat.data.model.SortingValues
 //
 //import java.util.ArrayList
@@ -18,7 +18,7 @@
 // */
 //
 //class LocalDataSource @Inject
-//constructor(private val database: RestaurantDatabase, val preferences: Where2EatPreferences) {
+//constructor(private val database: RestaurantDatabase, val preferences: TakeawayPreferences) {
 //
 //    private val restaurantDao: RestaurantDao
 //
@@ -76,7 +76,7 @@
 //        this.restaurantDao = database.restaurantDao()
 //    }
 //
-//    fun getRestaurantsSorted(sortType: Where2EatPreferences.SortType): Observable<List<Restaurant>> {
+//    fun getRestaurantsSorted(sortType: TakeawayPreferences.SortType): Observable<List<Restaurant>> {
 //        preferences.setSortType(sortType)
 //        return restaurantsSorted
 //    }

@@ -2,7 +2,7 @@ package com.takeaway.data
 
 import android.content.SharedPreferences
 
-class Where2EatPreferences(private val sharedPreferences: SharedPreferences) {
+class TakeawayPreferences(private val sharedPreferences: SharedPreferences) {
 
     fun setSortType(sortType: SortType) {
         sharedPreferences.edit().putInt(KEY_SORT_TYPE, sortType.ordinal).apply()

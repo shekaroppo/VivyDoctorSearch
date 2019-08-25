@@ -10,11 +10,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takeaway.R
-import com.takeaway.data.model.Restaurant
-import com.takeaway.data.model.RestaurantResponse
 import com.takeaway.databinding.FragmentRestaurantListBinding
 import com.takeaway.ui.base.BaseFragment
-import com.takeaway.utils.DataWrapper
 import javax.inject.Inject
 
 
