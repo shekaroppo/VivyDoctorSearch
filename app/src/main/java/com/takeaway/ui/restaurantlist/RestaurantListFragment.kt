@@ -104,7 +104,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
 
     private fun getRestaurant(query: String) {
         binding.query = query
-        viewModel.searchRestaurantsByName(query)
+        viewModel.searchRestaurantsByName(String.format("*%s*", query))
     }
 
 }

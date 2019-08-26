@@ -6,9 +6,10 @@ import androidx.room.TypeConverters
 
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
+import com.takeaway.data.model.RestaurantFtsEntity
 import com.takeaway.data.model.StatusConverter
 
-@Database(entities = [Restaurant::class, Favourite::class], version = 1, exportSchema = false)
+@Database(entities = [Restaurant::class, RestaurantFtsEntity::class, Favourite::class], version = 1, exportSchema = false)
 @TypeConverters(StatusConverter::class)
 abstract class RestaurantDatabase : RoomDatabase() {
     abstract fun restaurantDao(): RestaurantDao

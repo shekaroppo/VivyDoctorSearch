@@ -3,10 +3,13 @@ package com.takeaway.injection.module
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.takeaway.TakeawayApplication
 import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.db.RestaurantDao
 import com.takeaway.data.db.RestaurantDatabase
+import com.takeaway.utils.Constants
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -17,7 +20,16 @@ class AppModule {
     @Provides
     @Singleton
     internal fun provideDatabase(application: Application): RestaurantDatabase {
-        return Room.databaseBuilder(application, RestaurantDatabase::class.java, "restaurant").build()
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE VIRTUAL TABLE IF NOT EXISTS `restaurantsFts` USING FTS4(" + "`name` TEXT,  content=`restaurants`)")
+                database.execSQL("INSERT INTO restaurantsFts (`name`) " + "SELECT `name`  FROM restaurants")
+
+            }
+        }
+        return Room.databaseBuilder(application, RestaurantDatabase::class.java, Constants.DATABASE_NAME)
+                .addMigrations(MIGRATION_1_2).build()
+
     }
 
     @Provides
@@ -25,6 +37,7 @@ class AppModule {
     internal fun provideRestaurantDao(restaurantDatabase: RestaurantDatabase): RestaurantDao {
         return restaurantDatabase.restaurantDao()
     }
+
     @Provides
     @Singleton
     internal fun provideSharedPreferences(application: Application): TakeawayPreferences {

@@ -1,6 +1,7 @@
 package com.takeaway.data.db
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 import com.takeaway.data.model.Favourite
@@ -13,19 +14,19 @@ import androidx.sqlite.db.SupportSQLiteQuery
 interface RestaurantDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun setRestaurants(restaurants: List<Restaurant>)
+    suspend fun setRestaurants(restaurants: List<Restaurant>)
 
     @RawQuery
-    fun getRestaurants(query: SupportSQLiteQuery): List<Restaurant>
+    suspend fun getRestaurants(query: SupportSQLiteQuery): List<Restaurant>
 
     @Query("SELECT * FROM restaurants WHERE name =:name")
-    fun getRestaurantByName(name: String): Restaurant
+    suspend fun getRestaurantByName(name: String): Restaurant
 
     @Update
     suspend fun update(restaurant: Restaurant)
 
     @Query("SELECT * FROM restaurants WHERE name LIKE :query")
-    fun searchRestaurantsByName(query: String): List<Restaurant>
+    suspend fun searchRestaurantsByName(query: String): List<Restaurant>
 
 
     @Query("SELECT restaurantName FROM favourites")
@@ -37,7 +38,8 @@ interface RestaurantDao {
     @Delete
     suspend fun removeFavourite(favourite: Favourite)
 
-
+    @Query("SELECT restaurants.* FROM restaurants JOIN restaurantsFts ON (restaurants.name = restaurantsFts.name) WHERE restaurantsFts MATCH :query")
+    fun searchAllProducts(query: String): List<Restaurant>
 
 
 }

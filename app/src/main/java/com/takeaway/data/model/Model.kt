@@ -1,10 +1,7 @@
 package com.takeaway.data.model
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 data class RestaurantResponse(
         val restaurants: List<Restaurant>
@@ -36,6 +33,10 @@ data class SortingValues(
         @ColumnInfo(name = "rating_avg")
         val ratingAverage: Double
 )
+
+@Entity(tableName = "restaurantsFts")
+@Fts4(contentEntity = Restaurant::class)
+class RestaurantFtsEntity(val name: String)
 
 @Entity(tableName = "favourites")
 data class Favourite(@field:PrimaryKey
