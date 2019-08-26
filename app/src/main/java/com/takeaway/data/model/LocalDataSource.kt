@@ -83,26 +83,26 @@
 //
 //    fun save(restaurants: List<Restaurant>): Observable<List<Restaurant>> {
 //        return Observable.fromCallable {
-//            restaurantDao.insertRestaurants(restaurants)
+//            restaurantDao.setRestaurants(restaurants)
 //            setFavourites()
 //            restaurants
 //        }
 //    }
 //
-//    fun addToFavorite(name: String) {
+//    fun setFavorite(name: String) {
 //        Executors.newSingleThreadExecutor()
 //                .execute {
-//                    restaurantDao.addToFavorite(Favourite(name))
+//                    restaurantDao.setFavorite(Favourite(name))
 //                    val restaurant = restaurantDao.getByName(name)
 //                    restaurant.favourite = true
 //                    restaurantDao.update(restaurant)
 //                }
 //    }
 //
-//    fun removeFromFavourite(name: String) {
+//    fun removeFavourite(name: String) {
 //        Executors.newSingleThreadExecutor()
 //                .execute {
-//                    restaurantDao.removeFromFavourite(Favourite(name))
+//                    restaurantDao.removeFavourite(Favourite(name))
 //                    val restaurant = restaurantDao.getByName(name)
 //                    restaurant.favourite = false
 //                    restaurantDao.update(restaurant)

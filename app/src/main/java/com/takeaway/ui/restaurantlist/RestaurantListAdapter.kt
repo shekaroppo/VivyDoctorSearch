@@ -41,9 +41,9 @@ class RestaurantListAdapter(private var restaurants: List<Restaurant>, private v
         private fun toggleFavButton(isChecked: Boolean, restaurant: Restaurant) {
             restaurant.favourite = isChecked
             if (isChecked)
-                takeawayRepository.addToFavorite(Favourite(restaurant.name))
+                takeawayRepository.setFavorite(Favourite(restaurant.name))
             else
-                takeawayRepository.removeFromFavourite(Favourite(restaurant.name))
+                takeawayRepository.removeFavourite(Favourite(restaurant.name))
         }
     }
 }

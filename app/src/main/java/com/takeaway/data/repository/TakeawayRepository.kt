@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
+import androidx.sqlite.db.SimpleSQLiteQuery
+
 
 @Singleton
 class TakeawayRepository @Inject constructor(private val apiService: ApiService,
@@ -18,8 +20,9 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
         val favourites = database.restaurantDao().getFavouriteRestaurantNames()
         val restaurants = apiService.getRestaurants().restaurants
         val restaurantsWithFav = updateFavourites(favourites, restaurants)
-        database.restaurantDao().insertRestaurants(restaurantsWithFav)
-        return restaurantsWithFav
+        database.restaurantDao().setRestaurants(restaurantsWithFav)
+        val query = SimpleSQLiteQuery("SELECT * FROM restaurants ORDER BY favourite DESC, status ASC")
+        return database.restaurantDao().getRestaurants(query)
     }
 
     private fun updateFavourites(favourites: List<String>, restaurants: List<Restaurant>): List<Restaurant> {
@@ -31,11 +34,11 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
         return restaurants
     }
 
-    fun addToFavorite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().addToFavorite(favourite) }
+    fun setFavorite(favourite: Favourite) {
+        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().setFavorite(favourite) }
     }
 
-    fun removeFromFavourite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().removeFromFavourite(favourite) }
+    fun removeFavourite(favourite: Favourite) {
+        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().removeFavourite(favourite) }
     }
 }
