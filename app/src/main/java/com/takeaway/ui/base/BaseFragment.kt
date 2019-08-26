@@ -42,7 +42,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel> : Fragment(
 
     override fun onViewCreated(@NonNull view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(getViewModelClass())
     }
 
     abstract fun getViewModelClass(): Class<VM>

@@ -2,12 +2,13 @@ package com.takeaway.data.model
 
 import androidx.annotation.NonNull
 import androidx.room.*
+import com.takeaway.utils.Constants
 
 data class RestaurantResponse(
         val restaurants: List<Restaurant>
 )
 
-@Entity(tableName = "restaurants")
+@Entity(tableName = Constants.TABLE_RESTAURANTS)
 data class Restaurant(
         @PrimaryKey
         @NonNull
@@ -34,11 +35,11 @@ data class SortingValues(
         val ratingAverage: Double
 )
 
-@Entity(tableName = "restaurantsFts")
+@Entity(tableName = Constants.TABLE_RESTAURANTSFTS)
 @Fts4(contentEntity = Restaurant::class)
 class RestaurantFtsEntity(val name: String)
 
-@Entity(tableName = "favourites")
+@Entity(tableName = Constants.TABLE_FAVOURITES)
 data class Favourite(@field:PrimaryKey
                      @field:NonNull
                      var restaurantName: String)

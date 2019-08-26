@@ -22,8 +22,8 @@ class AppModule {
     internal fun provideDatabase(application: Application): RestaurantDatabase {
         val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE VIRTUAL TABLE IF NOT EXISTS `restaurantsFts` USING FTS4(" + "`name` TEXT,  content=`restaurants`)")
-                database.execSQL("INSERT INTO restaurantsFts (`name`) " + "SELECT `name`  FROM restaurants")
+                database.execSQL("CREATE VIRTUAL TABLE IF NOT EXISTS `"+Constants.TABLE_RESTAURANTSFTS+"` USING FTS4(" + "`name` TEXT,  content=`"+Constants.TABLE_RESTAURANTS+"`)")
+                database.execSQL("INSERT INTO "+Constants.TABLE_RESTAURANTSFTS +"(`name`) " + "SELECT `name`  FROM "+Constants.TABLE_RESTAURANTS+"")
 
             }
         }
@@ -41,7 +41,7 @@ class AppModule {
     @Provides
     @Singleton
     internal fun provideSharedPreferences(application: Application): TakeawayPreferences {
-        val pref = application.getSharedPreferences("where2eatPref", Context.MODE_PRIVATE)
+        val pref = application.getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
         return TakeawayPreferences(pref)
     }
 }

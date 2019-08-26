@@ -10,8 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takeaway.R
-import com.takeaway.data.TakeawayPreferences
-import com.takeaway.data.TakeawayPreferences.*
 import com.takeaway.data.TakeawayPreferences.SortType.*
 import com.takeaway.databinding.FragmentRestaurantListBinding
 import com.takeaway.ui.base.BaseFragment
@@ -56,12 +54,17 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_search, menu)
+        initSearchFilter(menu)
+        initSortFilter(menu)
+    }
+
+    private fun initSearchFilter(menu: Menu) {
         val searchActionMenuItem = menu.findItem(R.id.menu_search)
         searchView = searchActionMenuItem.actionView as SearchView
         searchView.setOnQueryTextListener(onQueryTextListener(searchActionMenuItem))
-        initSortingFilter(menu)
     }
-    private fun initSortingFilter(menu: Menu) {
+
+    private fun initSortFilter(menu: Menu) {
         when (viewModel.getSortingValue()) {
             DELIVERY_COSTS -> menu.findItem(R.id.delivery_costs).isChecked = true
             RATING_AVG -> menu.findItem(R.id.rating_avg).isChecked = true
@@ -77,7 +80,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
         if (item.groupId == R.id.sorting_group) {
             if (!item.isChecked) {
                 item.isChecked = true
-                viewModel.changeSortingValue(valueOf(item.title.toString().toUpperCase()))
+                viewModel.sortRestaurants(valueOf(item.title.toString().toUpperCase()))
                 return true
             }
         }
@@ -89,7 +92,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
                 if (!searchView.isIconified) {
                     searchView.isIconified = true
                 }
-                getRestaurant(query)
+                searchRestaurantsByName(query)
                 binding.recyclerView.scrollToPosition(0)
                 binding.toolbar.title = query
                 searchActionMenuItem.collapseActionView()
@@ -102,9 +105,9 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
         }
     }
 
-    private fun getRestaurant(query: String) {
+    private fun searchRestaurantsByName(query: String) {
         binding.query = query
-        viewModel.searchRestaurantsByName(String.format("*%s*", query))
+        viewModel.searchRestaurantsByName("*$query*")
     }
 
 }

@@ -20,8 +20,6 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
 
     private val baseQuery = "SELECT * FROM restaurants ORDER BY favourite DESC, status ASC, "
 
-    private val searchQuery = "SELECT * FROM restaurants JOIN restaurantsFts ON (restaurants.name = restaurantsFts.name) WHERE restaurantsFts MATCH "
-
     suspend fun getRestaurantsFromServer(): List<Restaurant> {
         val favourites = restaurantDao.getFavouriteRestaurantNames()
         val restaurants = apiService.getRestaurants().restaurants
@@ -62,13 +60,13 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
         return preferences.sortType
     }
 
-    suspend fun getRestaurantsSorted(value: TakeawayPreferences.SortType): List<Restaurant> {
+    suspend fun sortRestaurants(value: TakeawayPreferences.SortType): List<Restaurant> {
         preferences.sortType = value
         val query = SimpleSQLiteQuery(baseQuery + preferences.getSortingValue)
         return restaurantDao.getRestaurants(query)
     }
 
     fun searchRestaurantsByName(query: String): List<Restaurant> {
-        return restaurantDao.searchAllProducts(query)
+        return restaurantDao.searchRestaurantsByName(query)
     }
 }

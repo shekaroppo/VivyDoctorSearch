@@ -1,13 +1,10 @@
 package com.takeaway.data.db
 
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
-
-import androidx.sqlite.db.SupportSQLiteQuery
 
 
 @Dao
@@ -25,9 +22,8 @@ interface RestaurantDao {
     @Update
     suspend fun update(restaurant: Restaurant)
 
-    @Query("SELECT * FROM restaurants WHERE name LIKE :query")
-    suspend fun searchRestaurantsByName(query: String): List<Restaurant>
-
+    @Query("SELECT restaurants.* FROM restaurants JOIN restaurantsFts ON (restaurants.name = restaurantsFts.name) WHERE restaurantsFts MATCH :query")
+    fun searchRestaurantsByName(query: String): List<Restaurant>
 
     @Query("SELECT restaurantName FROM favourites")
     suspend fun getFavouriteRestaurantNames(): List<String>
@@ -37,9 +33,5 @@ interface RestaurantDao {
 
     @Delete
     suspend fun removeFavourite(favourite: Favourite)
-
-    @Query("SELECT restaurants.* FROM restaurants JOIN restaurantsFts ON (restaurants.name = restaurantsFts.name) WHERE restaurantsFts MATCH :query")
-    fun searchAllProducts(query: String): List<Restaurant>
-
 
 }

@@ -46,10 +46,10 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
        return  takeawayRepository.getSortingValue()
     }
 
-    fun changeSortingValue(value: TakeawayPreferences.SortType) {
+    fun sortRestaurants(value: TakeawayPreferences.SortType) {
         viewModelScope.launch(coroutineExceptionHandler) {
             val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
-                takeawayRepository.getRestaurantsSorted(value)
+                takeawayRepository.sortRestaurants(value)
             }
             withContext(Dispatchers.Main + coroutineExceptionHandler) {
                 restaurantsMutableLiveData.postValue(restaurants)

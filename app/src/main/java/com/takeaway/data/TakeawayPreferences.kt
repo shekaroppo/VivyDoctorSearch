@@ -19,7 +19,7 @@ class TakeawayPreferences @Inject constructor(private val sharedPreferences: Sha
                 5 -> RATING_AVG
                 6 -> NEWEST
                 7 -> BEST_MATCH
-                else -> POPULARITY
+                else -> MIN_COST
             }
         }
         @SuppressLint("ApplySharedPref")
