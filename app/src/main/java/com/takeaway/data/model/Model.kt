@@ -4,6 +4,9 @@ import androidx.annotation.NonNull
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.takeaway.utils.Status
+import com.takeaway.utils.StatusConverter
 
 data class RestaurantResponse(
         val restaurants: List<Restaurant>
@@ -16,7 +19,7 @@ data class Restaurant(
         val name: String,
         @Embedded
         val sortingValues: SortingValues,
-        val status: String,
+        var status: Status,
         var favourite: Boolean = false
 )
 

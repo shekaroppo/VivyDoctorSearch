@@ -33,7 +33,7 @@ class RestaurantListAdapter(private var restaurants: List<Restaurant>, private v
     inner class SearchViewHolder(private val binding: ItemRestaurantBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(restaurant: Restaurant) {
             binding.restaurant = restaurant
-            binding.status.text = restaurant.status.capitalize()
+            binding.status.text = restaurant.status.name
             binding.fav.setOnClickListener { view -> toggleFavButton((view as CheckBox).isChecked, restaurant) }
             binding.executePendingBindings()
         }

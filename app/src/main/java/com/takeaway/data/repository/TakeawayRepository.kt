@@ -35,10 +35,20 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     fun setFavorite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().setFavorite(favourite) }
+        CoroutineScope(Dispatchers.IO).launch {
+            database.restaurantDao().setFavorite(favourite)
+            val restaurant = database.restaurantDao().getByName(favourite.restaurantName)
+            restaurant.favourite=true
+            database.restaurantDao().update(restaurant)
+        }
     }
 
     fun removeFavourite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch { database.restaurantDao().removeFavourite(favourite) }
+        CoroutineScope(Dispatchers.IO).launch {
+            database.restaurantDao().removeFavourite(favourite)
+            val restaurant = database.restaurantDao().getByName(favourite.restaurantName)
+            restaurant.favourite=false
+            database.restaurantDao().update(restaurant)
+        }
     }
 }
