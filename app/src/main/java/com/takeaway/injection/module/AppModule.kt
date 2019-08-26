@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.takeaway.TakeawayApplication
 import com.takeaway.data.TakeawayPreferences
+import com.takeaway.data.db.RestaurantDao
 import com.takeaway.data.db.RestaurantDatabase
 import dagger.Binds
 import dagger.Module
@@ -19,6 +20,11 @@ class AppModule {
         return Room.databaseBuilder(application, RestaurantDatabase::class.java, "restaurant").build()
     }
 
+    @Provides
+    @Singleton
+    internal fun provideRestaurantDao(restaurantDatabase: RestaurantDatabase): RestaurantDao {
+        return restaurantDatabase.restaurantDao()
+    }
     @Provides
     @Singleton
     internal fun provideSharedPreferences(application: Application): TakeawayPreferences {

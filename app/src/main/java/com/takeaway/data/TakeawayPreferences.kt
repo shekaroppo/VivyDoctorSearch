@@ -1,5 +1,6 @@
 package com.takeaway.data
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import com.takeaway.data.TakeawayPreferences.SortType.*
 import com.takeaway.utils.Constants
@@ -21,8 +22,9 @@ class TakeawayPreferences @Inject constructor(private val sharedPreferences: Sha
                 else -> POPULARITY
             }
         }
+        @SuppressLint("ApplySharedPref")
         set(sortType) {
-           val saved = sharedPreferences.edit().putInt(Constants.KEY_SORT_TYPE, sortType.ordinal).commit()
+            sharedPreferences.edit().putInt(Constants.KEY_SORT_TYPE, sortType.ordinal).commit()
         }
 
 

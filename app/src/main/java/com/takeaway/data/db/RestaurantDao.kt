@@ -15,17 +15,18 @@ interface RestaurantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun setRestaurants(restaurants: List<Restaurant>)
 
-    @Query("SELECT * FROM restaurants ORDER BY favourite DESC, status ASC")
-    suspend fun getRestaurants(): List<Restaurant>
-
     @RawQuery
     fun getRestaurants(query: SupportSQLiteQuery): List<Restaurant>
 
     @Query("SELECT * FROM restaurants WHERE name =:name")
-    fun getByName(name: String): Restaurant
+    fun getRestaurantByName(name: String): Restaurant
 
     @Update
     suspend fun update(restaurant: Restaurant)
+
+    @Query("SELECT * FROM restaurants WHERE name LIKE :query")
+    fun searchRestaurantsByName(query: String): List<Restaurant>
+
 
     @Query("SELECT restaurantName FROM favourites")
     suspend fun getFavouriteRestaurantNames(): List<String>
@@ -37,9 +38,6 @@ interface RestaurantDao {
     suspend fun removeFavourite(favourite: Favourite)
 
 
-//
-//    @Query("SELECT * FROM restaurants WHERE name LIKE :name")
-//    fun searchByName(name: String): Single<List<Restaurant>>
 
 
 }

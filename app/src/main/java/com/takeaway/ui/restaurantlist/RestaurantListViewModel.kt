@@ -57,4 +57,15 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
         }
     }
 
+    fun searchRestaurantsByName(query: String) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
+                takeawayRepository.searchRestaurantsByName(query)
+            }
+            withContext(Dispatchers.Main + coroutineExceptionHandler) {
+                restaurantsMutableLiveData.postValue(restaurants)
+            }
+        }
+    }
+
 }
