@@ -1,12 +1,10 @@
 package com.takeaway.data.model
 
 import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.takeaway.utils.Status
-import com.takeaway.utils.StatusConverter
 
 data class RestaurantResponse(
         val restaurants: List<Restaurant>
@@ -24,13 +22,18 @@ data class Restaurant(
 )
 
 data class SortingValues(
+        @ColumnInfo(name = "avg_prod_price")
         val averageProductPrice: Int,
+        @ColumnInfo(name = "best_match")
         val bestMatch: Int,
+        @ColumnInfo(name = "delivery_costs")
         val deliveryCosts: Int,
         val distance: Int,
+        @ColumnInfo(name = "min_cost")
         val minCost: Int,
         val newest: Int,
         val popularity: Int,
+        @ColumnInfo(name = "rating_avg")
         val ratingAverage: Double
 )
 

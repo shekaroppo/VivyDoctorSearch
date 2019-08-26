@@ -1,4 +1,4 @@
-package com.takeaway.utils
+package com.takeaway.data.model
 
 import androidx.room.TypeConverter
 

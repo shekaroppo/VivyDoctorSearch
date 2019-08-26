@@ -2,6 +2,7 @@ package com.takeaway.ui.restaurantlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.ui.base.BaseViewModel
@@ -27,7 +28,7 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
         displayLoader(true)
         viewModelScope.launch(coroutineExceptionHandler) {
             val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
-                takeawayRepository.getRestaurants()
+                takeawayRepository.getRestaurantsFromServer()
             }
             withContext(Dispatchers.Main + coroutineExceptionHandler) {
                 displayLoader(false)
@@ -39,6 +40,21 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
     private fun onError(exception: Throwable) {
         displayLoader(false)
         setErrorMessage(true, exception.message!!)
+    }
+
+    fun getSortingValue(): TakeawayPreferences.SortType {
+       return  takeawayRepository.getSortingValue()
+    }
+
+    fun changeSortingValue(value: TakeawayPreferences.SortType) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
+                takeawayRepository.getRestaurantsSorted(value)
+            }
+            withContext(Dispatchers.Main + coroutineExceptionHandler) {
+                restaurantsMutableLiveData.postValue(restaurants)
+            }
+        }
     }
 
 }

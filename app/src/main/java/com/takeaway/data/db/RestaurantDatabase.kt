@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
-import com.takeaway.utils.StatusConverter
+import com.takeaway.data.model.StatusConverter
 
 @Database(entities = [Restaurant::class, Favourite::class], version = 1, exportSchema = false)
 @TypeConverters(StatusConverter::class)

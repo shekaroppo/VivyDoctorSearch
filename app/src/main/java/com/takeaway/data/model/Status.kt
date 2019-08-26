@@ -1,4 +1,4 @@
-package com.takeaway.utils
+package com.takeaway.data.model
 
 import com.google.gson.annotations.SerializedName
 
