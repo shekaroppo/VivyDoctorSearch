@@ -1,16 +1,16 @@
 <resources>
     <string name="search_icon_title">Search Restaurant</string>
     <string name="app_name">Takeaway-Restaurant</string>
-    <string name="retry">Retry</string>
-    <string name="minimum_cost">Min_Cost</string>
-    <string name="delivery_costs">Delivery_Costs</string>
-    <string name="avg_product_price">Avg_Prod_Price</string>
+    <string name="retry">Load Restaurant</string>
+    <string name="minimum_cost">Min Cost</string>
+    <string name="delivery_costs">Delivery Costs</string>
+    <string name="avg_product_price">Avg Product Price</string>
     <string name="popularity">Popularity</string>
     <string name="distance">Distance</string>
-    <string name="rating_average">Rating_Avg</string>
+    <string name="rating_average">Rating Avg</string>
     <string name="newest">Newest</string>
-    <string name="best_match">Best_Match</string>
-    <string name="select_sorting_filter">Select Sorting Filter</string>
+    <string name="best_match">Best Match</string>
+    <string name="sort_by">Sort by</string>
 
     <string name="heart">
     M25.119,2.564c12.434,0.023,18.68,5.892,24.88,17.612  c6.2-11.721,12.446-17.589,24.877-17.612c13.81-0.025,25.035,10.575,25.061,23.66c0.033,23.708-24.952,47.46-49.938,71.212  C25.016,73.685,0.03,49.932,0.064,26.224C0.085,13.14,11.309,2.539,25.119,2.564z

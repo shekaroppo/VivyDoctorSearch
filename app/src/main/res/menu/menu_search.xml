@@ -4,34 +4,37 @@
     <group
         android:id="@+id/sorting_group"
         android:checkableBehavior="single">
+
         <item
             android:checkable="false"
             android:enabled="false"
-            android:title="@string/select_sorting_filter" />
-        <item
-            android:id="@+id/min_cost"
-            android:title="@string/minimum_cost" />
-        <item
-            android:id="@+id/delivery_costs"
-            android:title="@string/delivery_costs" />
+            android:title="@string/sort_by" />
         <item
             android:id="@+id/avg_prod_price"
             android:title="@string/avg_product_price" />
         <item
-            android:id="@+id/popularity"
-            android:title="@string/popularity" />
+            android:id="@+id/best_match"
+            android:title="@string/best_match" />
+        <item
+            android:id="@+id/delivery_costs"
+            android:title="@string/delivery_costs" />
         <item
             android:id="@+id/distance"
             android:title="@string/distance" />
         <item
-            android:id="@+id/rating_avg"
-            android:title="@string/rating_average" />
+            android:id="@+id/min_cost"
+            android:title="@string/minimum_cost" />
         <item
             android:id="@+id/newest"
             android:title="@string/newest" />
         <item
-            android:id="@+id/best_match"
-            android:title="@string/best_match" />
+            android:id="@+id/popularity"
+            android:title="@string/popularity" />
+        <item
+            android:id="@+id/rating_avg"
+            android:title="@string/rating_average" />
+
+
     </group>
     <item
         android:id="@+id/menu_search"

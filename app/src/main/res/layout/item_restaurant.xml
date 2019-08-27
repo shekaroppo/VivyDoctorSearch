@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/text_margin">
+            android:padding="@dimen/margin_medium">
 
             <CheckBox
                 android:id="@+id/fav"
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
-                android:layout_marginTop="@dimen/text_margin_very_small"
+                android:layout_marginTop="@dimen/margin_very_small"
                 android:numStars="@{5}"
                 apps:rating="@{restaurant.sortingValues.ratingAverage}" />
 

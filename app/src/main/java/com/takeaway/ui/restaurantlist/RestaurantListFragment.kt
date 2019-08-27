@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takeaway.R
+import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.TakeawayPreferences.SortType.*
 import com.takeaway.databinding.FragmentRestaurantListBinding
 import com.takeaway.ui.base.BaseFragment
@@ -36,6 +37,35 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
         subscribeToModel()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_search, menu)
+        initSearchFilter(menu)
+        initSortFilter(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.groupId == R.id.sorting_group) {
+            if (!item.isChecked) {
+                item.isChecked = true
+                val sortType = when (item.itemId) {
+                    R.id.delivery_costs -> DELIVERY_COSTS
+                    R.id.rating_avg -> RATING_AVG
+                    R.id.popularity -> POPULARITY
+                    R.id.best_match -> BEST_MATCH
+                    R.id.min_cost -> MIN_COST
+                    R.id.newest -> NEWEST
+                    R.id.distance -> DISTANCE
+                    R.id.avg_prod_price -> AVG_PROD_PRICE
+                    else -> MIN_COST
+                }
+                viewModel.sortRestaurants(sortType)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun initializeUI() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
@@ -51,12 +81,6 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
         viewModel.restaurantsMutableLiveData.observe(this, Observer { restaurantListAdapter.updateData(it) })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_search, menu)
-        initSearchFilter(menu)
-        initSortFilter(menu)
-    }
 
     private fun initSearchFilter(menu: Menu) {
         val searchActionMenuItem = menu.findItem(R.id.menu_search)
@@ -76,16 +100,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
             AVG_PROD_PRICE -> menu.findItem(R.id.avg_prod_price).isChecked = true
         }
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.groupId == R.id.sorting_group) {
-            if (!item.isChecked) {
-                item.isChecked = true
-                viewModel.sortRestaurants(valueOf(item.title.toString().toUpperCase()))
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
     private fun onQueryTextListener(searchActionMenuItem: MenuItem): SearchView.OnQueryTextListener {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

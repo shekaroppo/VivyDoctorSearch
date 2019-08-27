@@ -2,6 +2,7 @@ package com.takeaway.ui.restaurantlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.takeaway.R
 import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
@@ -11,7 +12,9 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Throwable as Throwable1
 
 class RestaurantListViewModel @Inject constructor(private val takeawayRepository: TakeawayRepository) : BaseViewModel() {
 
@@ -37,15 +40,6 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
         }
     }
 
-    private fun onError(exception: Throwable) {
-        displayLoader(false)
-        setErrorMessage(true, exception.message!!)
-    }
-
-    fun getSortingValue(): TakeawayPreferences.SortType {
-       return  takeawayRepository.getSortingValue()
-    }
-
     fun sortRestaurants(value: TakeawayPreferences.SortType) {
         viewModelScope.launch(coroutineExceptionHandler) {
             val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
@@ -63,9 +57,17 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
                 takeawayRepository.searchRestaurantsByName(query)
             }
             withContext(Dispatchers.Main + coroutineExceptionHandler) {
-                restaurantsMutableLiveData.postValue(restaurants)
+               if(restaurants.isEmpty()) onError(Exception("No Result Found")) else restaurantsMutableLiveData.postValue(restaurants)
             }
         }
     }
 
+    private fun onError(exception: Throwable1) {
+        displayLoader(false)
+        setErrorMessage(true, exception.message!!)
+    }
+
+    fun getSortingValue(): TakeawayPreferences.SortType {
+        return  takeawayRepository.getSortingValue()
+    }
 }
