@@ -1,4 +1,4 @@
-package com.takeaway.api
+package com.takeaway
 
 import com.takeaway.data.services.ApiService
 import okhttp3.mockwebserver.MockResponse
@@ -11,7 +11,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
@@ -29,7 +28,6 @@ class ApiResponseTest {
         service = Retrofit.Builder()
                 .baseUrl(mockWebServer.url("/"))
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(ApiService::class.java)
     }
@@ -44,8 +42,7 @@ class ApiResponseTest {
     fun searchDoctorsTest() {
         enqueueResponse("doctors.json")
 
-//        val testSubscriber = service.searchDoctors(hashMapOf("restaurantlist" to "Frau", "lat" to Constants.LATITUDE, "lng" to Constants.LONGITUDE),
-//                hashMapOf("Authorization" to "Bearer ${Constants.ACCESS_TOKEN}")).test()
+//        val testSubscriber = service.getRestaurants()
 //        testSubscriber.assertNoErrors()
 //        val response = testSubscriber.values()[0] as SearchResultResponse
 //        assertThat(response, notNullValue())
