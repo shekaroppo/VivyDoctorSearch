@@ -23,7 +23,7 @@ interface RestaurantDao {
     suspend fun update(restaurant: Restaurant)
 
     @Query("SELECT restaurants.* FROM restaurants JOIN restaurantsFts ON (restaurants.name = restaurantsFts.name) WHERE restaurantsFts MATCH :query")
-    fun searchRestaurantsByName(query: String): List<Restaurant>
+    suspend fun searchRestaurantsByName(query: String): List<Restaurant>
 
     @Query("SELECT restaurantName FROM favourites")
     suspend fun getFavouriteRestaurantNames(): List<String>

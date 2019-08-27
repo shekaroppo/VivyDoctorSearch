@@ -15,8 +15,6 @@ ext {
     def versionDagger = '2.23.2'
     def versionRetrofit = '2.6.1'
     def versionOkhttp = '4.1.0'
-    def versionRxJava = '2.2.11'
-    def versionRxAndroid = '2.1.1'
     def versionGlide = '4.9.0'
     def versionLocation = '16.0.0'
     def versionJunit = '4.12'
@@ -54,11 +52,8 @@ ext {
                 daggerAndroidProcessor   : [group: 'com.google.dagger', name: 'dagger-android-processor', version: versionDagger],
                 retrofit2                : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versionRetrofit],
                 converterGson            : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versionRetrofit],
-              //  retrofit2RxAdapter       : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: versionRetrofit],
                 okhttp3                  : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versionOkhttp],
                 okhttp3LoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versionOkhttp],
-               // rxJava                   : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
-               // rxAndroid                : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
                 glide                    : [group: 'com.github.bumptech.glide', name: 'glide', version: versionGlide]]
 
     def test = [junit          : [group: 'junit', name: 'junit', version: versionJunit],
@@ -81,6 +76,7 @@ ext {
                        [configuration: "kapt", dependency: androidLibs.roomCompiler],
                        [configuration: "implementation", dependency: androidLibs.roomTesting],
                        [configuration: "implementation", dependency: androidLibs.coroutinesCore],
+                       [configuration: "testImplementation", dependency: androidLibs.coroutinesTest],
                        [configuration: "androidTestImplementation", dependency: androidLibs.coroutinesTest],
                        [configuration: "implementation", dependency: androidLibs.coroutinesAndroid],
                        [configuration: "implementation", dependency: androidLibs.constraintLayout],
@@ -94,11 +90,8 @@ ext {
                        [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
                        [configuration: "implementation", dependency: libs.retrofit2],
                        [configuration: "implementation", dependency: libs.converterGson],
-                    //   [configuration: "implementation", dependency: libs.retrofit2RxAdapter],
                        [configuration: "implementation", dependency: libs.okhttp3],
                        [configuration: "implementation", dependency: libs.okhttp3LoggingInterceptor],
-                    //   [configuration: "implementation", dependency: libs.rxJava],
-                       //[configuration: "implementation", dependency: libs.rxAndroid],
                        [configuration: "implementation", dependency: libs.glide],
                        [configuration: 'testImplementation', dependency: test.junit],
                        [configuration: 'testImplementation', dependency: test.mockitoCore],

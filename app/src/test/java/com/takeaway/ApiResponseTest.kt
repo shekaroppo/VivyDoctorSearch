@@ -40,7 +40,7 @@ class ApiResponseTest {
 
     @Test
     fun searchDoctorsTest() {
-        enqueueResponse("doctors.json")
+        enqueueResponse("restaurants.json")
 
 //        val testSubscriber = service.getRestaurants()
 //        testSubscriber.assertNoErrors()

@@ -6,9 +6,7 @@ import com.takeaway.data.db.RestaurantDao
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.services.ApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -61,12 +59,14 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     suspend fun sortRestaurants(value: TakeawayPreferences.SortType): List<Restaurant> {
-        preferences.sortType = value
-        val query = SimpleSQLiteQuery(baseQuery + preferences.getSortingValue)
-        return restaurantDao.getRestaurants(query)
+        return  withContext(Dispatchers.IO) {
+            preferences.sortType = value
+            val query = SimpleSQLiteQuery(baseQuery + preferences.getSortingValue)
+            restaurantDao.getRestaurants(query)
+        }
     }
 
-    fun searchRestaurantsByName(query: String): List<Restaurant> {
-        return restaurantDao.searchRestaurantsByName(query)
+    suspend fun searchRestaurantsByName(query: String): List<Restaurant> {
+        return  withContext(Dispatchers.IO) {restaurantDao.searchRestaurantsByName(query)}
     }
 }

@@ -30,36 +30,31 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
         setErrorMessage(false, Constants.EMPTY_MESSAGE)
         displayLoader(true)
         viewModelScope.launch(coroutineExceptionHandler) {
-            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
-                takeawayRepository.getRestaurantsFromServer()
-            }
-            withContext(Dispatchers.Main + coroutineExceptionHandler) {
-                displayLoader(false)
-                restaurantsMutableLiveData.postValue(restaurants)
-            }
+            postResults(takeawayRepository.getRestaurantsFromServer())
         }
     }
 
     fun sortRestaurants(value: TakeawayPreferences.SortType) {
+        setErrorMessage(false, Constants.EMPTY_MESSAGE)
+        displayLoader(true)
         viewModelScope.launch(coroutineExceptionHandler) {
-            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
-                takeawayRepository.sortRestaurants(value)
-            }
-            withContext(Dispatchers.Main + coroutineExceptionHandler) {
-                restaurantsMutableLiveData.postValue(restaurants)
-            }
+            postResults(takeawayRepository.sortRestaurants(value))
         }
     }
 
     fun searchRestaurantsByName(query: String) {
+        setErrorMessage(false, Constants.EMPTY_MESSAGE)
+        displayLoader(true)
         viewModelScope.launch(coroutineExceptionHandler) {
-            val restaurants = withContext(Dispatchers.IO + coroutineExceptionHandler) {
-                takeawayRepository.searchRestaurantsByName(query)
-            }
-            withContext(Dispatchers.Main + coroutineExceptionHandler) {
-               if(restaurants.isEmpty()) onError(Exception("No Result Found")) else restaurantsMutableLiveData.postValue(restaurants)
+            takeawayRepository.searchRestaurantsByName(query).let { restaurants ->
+                if (restaurants.isEmpty()) onError(Exception("No Result Found")) else postResults(restaurants)
             }
         }
+    }
+
+    private fun postResults(restaurants: List<Restaurant>) {
+        displayLoader(false)
+        restaurantsMutableLiveData.postValue(restaurants)
     }
 
     private fun onError(exception: Throwable1) {
@@ -68,6 +63,6 @@ class RestaurantListViewModel @Inject constructor(private val takeawayRepository
     }
 
     fun getSortingValue(): TakeawayPreferences.SortType {
-        return  takeawayRepository.getSortingValue()
+        return takeawayRepository.getSortingValue()
     }
 }
