@@ -1,7 +1,7 @@
 package com.takeaway.ui.restaurantlist
 
 class RestaurantEventHandler {
-    fun onRetrySearch(restaurantListViewModel: RestaurantListViewModel, query: String) {
+    fun onReload(restaurantListViewModel: RestaurantListViewModel) {
         restaurantListViewModel.getRestaurants()
     }
 }

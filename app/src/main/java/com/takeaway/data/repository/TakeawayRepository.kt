@@ -6,6 +6,7 @@ import com.takeaway.data.db.RestaurantDao
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.services.ApiService
+import com.takeaway.utils.Constants.BASE_QUERY
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,14 +17,12 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
                                              private val restaurantDao: RestaurantDao,
                                              private val preferences: TakeawayPreferences) : BaseRepository() {
 
-    private val baseQuery = "SELECT * FROM restaurants ORDER BY favourite DESC, status ASC, "
-
     suspend fun getRestaurantsFromServer(): List<Restaurant> {
         val favourites = restaurantDao.getFavouriteRestaurantNames()
         val restaurants = apiService.getRestaurants().restaurants
         val restaurantsWithFav = updateFavourites(favourites, restaurants)
         restaurantDao.setRestaurants(restaurantsWithFav)
-        val query = SimpleSQLiteQuery(baseQuery + preferences.getSortingValue)
+        val query = SimpleSQLiteQuery( "$BASE_QUERY, ${preferences.getSortingValue}" )
         return restaurantDao.getRestaurants(query)
     }
 
@@ -61,7 +60,7 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     suspend fun sortRestaurants(value: TakeawayPreferences.SortType): List<Restaurant> {
         return  withContext(Dispatchers.IO) {
             preferences.sortType = value
-            val query = SimpleSQLiteQuery(baseQuery + preferences.getSortingValue)
+            val query = SimpleSQLiteQuery("$BASE_QUERY, ${preferences.getSortingValue}")
             restaurantDao.getRestaurants(query)
         }
     }

@@ -20,6 +20,7 @@ ext {
     def versionJunit = '4.12'
     def versionMockito = '2.7.22'
     def versionCoreTesting = '1.1.0'
+    def versionArchTesting = '2.0.1'
     def versionRoom = '2.2.0-beta01'
     def versionCoroutines = '1.3.0'
 
@@ -34,12 +35,12 @@ ext {
                        cardview             : [group: 'androidx.cardview', name: 'cardview', version: versionAndroidXCardView],
                        roomRuntime          : [group: 'androidx.room', name: 'room-runtime', version: versionRoom],
                        roomCompiler         : [group: 'androidx.room', name: 'room-compiler', version: versionRoom],
-                       roomTesting          : [group: 'androidx.room', name: 'room-testing', version: versionRoom],
+
                        roomRx               : [group: 'androidx.room', name: 'room-rxjava2', version: versionRoom],
                        roomKtx              : [group: 'androidx.room', name: 'room-ktx', version: versionRoom],
                        coroutinesCore       : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: versionCoroutines],
                        coroutinesAndroid    : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: versionCoroutines],
-                       coroutinesTest       : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-test', version: versionCoroutines],
+
                        constraintLayout     : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: versionAndroidXConstraintLayout],
                        recyclerview         : [group: 'androidx.recyclerview', name: 'recyclerview', version: versionAndroidXRecyclerView],
                        navigationFragment   : [group: 'android.arch.navigation', name: 'navigation-fragment-ktx', version: versionNavigation],
@@ -60,7 +61,11 @@ ext {
                 mockitoCore    : [group: 'org.mockito', name: 'mockito-core', version: versionMockito],
                 mockitoAndroid : [group: 'org.mockito', name: 'mockito-android', version: versionMockito],
                 mockwebserver  : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: versionOkhttp],
-                coreArchTesting: [group: 'android.arch.core', name: 'core-testing', version: versionCoreTesting]]
+                coroutinesTest : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-test', version: versionCoroutines],
+                roomTesting    : [group: 'androidx.room', name: 'room-testing', version: versionRoom],
+                androidxTestCore    : [group: 'androidx.test', name: 'core', version: versionCoreTesting],
+                androidxTestRunner    : [group: 'androidx.test', name: 'runner', version: versionCoreTesting],
+                androidxTestArch    : [group: 'androidx.arch.core', name: 'core-testing', version: versionArchTesting]]
 
     appDependencies = [[configuration: "implementation", dependency: androidLibs.kotlin],
                        [configuration: "implementation", dependency: androidLibs.lifecycleExtensions],
@@ -74,10 +79,9 @@ ext {
                        [configuration: "implementation", dependency: androidLibs.roomRx],
                        [configuration: "implementation", dependency: androidLibs.roomKtx],
                        [configuration: "kapt", dependency: androidLibs.roomCompiler],
-                       [configuration: "implementation", dependency: androidLibs.roomTesting],
+
                        [configuration: "implementation", dependency: androidLibs.coroutinesCore],
-                       [configuration: "testImplementation", dependency: androidLibs.coroutinesTest],
-                       [configuration: "androidTestImplementation", dependency: androidLibs.coroutinesTest],
+
                        [configuration: "implementation", dependency: androidLibs.coroutinesAndroid],
                        [configuration: "implementation", dependency: androidLibs.constraintLayout],
                        [configuration: "implementation", dependency: androidLibs.recyclerview],
@@ -97,6 +101,13 @@ ext {
                        [configuration: 'testImplementation', dependency: test.mockitoCore],
                        [configuration: 'androidTestImplementation', dependency: test.mockitoAndroid],
                        [configuration: 'testImplementation', dependency: test.mockwebserver],
-                       [configuration: 'testImplementation', dependency: test.coreArchTesting]]
+                       [configuration: "testImplementation", dependency: test.coroutinesTest],
+                       [configuration: "androidTestImplementation", dependency: test.coroutinesTest],
+                       [configuration: "implementation", dependency: test.roomTesting],
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestCore],
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestRunner],
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestCore],
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestRunner],
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestArch]]
 }
 

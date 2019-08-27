@@ -3,17 +3,25 @@
 //import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 //import com.takeaway.MainCoroutineRule
 //import com.takeaway.data.repository.TakeawayRepository
+//import com.takeaway.data.services.ApiService
 //import com.takeaway.ui.restaurantlist.RestaurantListViewModel
 //import kotlinx.coroutines.ExperimentalCoroutinesApi
+//import okhttp3.mockwebserver.MockWebServer
+//import org.junit.After
 //import org.junit.Before
 //import org.junit.Rule
 //import org.junit.Test
+//import retrofit2.Retrofit
+//import retrofit2.converter.gson.GsonConverterFactory
+//import java.io.IOException
 //
 //@ExperimentalCoroutinesApi
 //class RestaurantListViewModelTest {
 //
 //    private lateinit var restaurantListViewModel: RestaurantListViewModel
 //    private lateinit var takeawayRepository: TakeawayRepository
+//    private lateinit var service: ApiService
+//    private lateinit var mockWebServer: MockWebServer
 //
 //    @ExperimentalCoroutinesApi
 //    @get:Rule
@@ -23,12 +31,24 @@
 //    @get:Rule
 //    var instantExecutorRule = InstantTaskExecutorRule()
 //
-//    val task = Task("Title1", "Description1")
 //
+//    @Throws(IOException::class)
 //    @Before
-//    fun setupViewModel() {
-//        takeawayRepository = FakeRepository()
+//    fun createService() {
+//        mockWebServer = MockWebServer()
+//        service = Retrofit.Builder()
+//                .baseUrl(mockWebServer.url("/"))
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//                .create(ApiService::class.java)
+//        takeawayRepository = TakeawayRepository(service)
 //        restaurantListViewModel = TaskDetailViewModel(tasksRepository)
+//    }
+//
+//    @Throws(IOException::class)
+//    @After
+//    fun stopService() {
+//        mockWebServer.shutdown()
 //    }
 //
 //    @Test
