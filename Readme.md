@@ -1,19 +1,21 @@
-## VivyDoctorSearch (Vivy test sample)
-==============================================================
+Takeaway Assignment
+===================================
 
-### Getting started
+This project is to showcase restaurant list with following features :-
 
-This is a test sample app for Vivy that uses Android Architecture Components with Dagger 2 and RxJava.
+- Favourites​: User can favourite restaurants and marked favourites​ are at the top of the list.
+- Openings state​: Restaurant is either open (top), order ahead (middle) or closed (bottom).
+- Sort options​: User can choose order of sort options.    
+- Search Filtering​: Used FTS4 Extensions for better text using Room database. 
 
-### Functionality
-The app is composed of 2 main screens.
+In this branch you'll find:
+*   Kotlin Coroutines for background operations.
+*   A single-activity architecture, using the Navigation component to manage fragment operations.
+*   A presentation layer that contains a fragment and a ViewModel per screen.
+*   Reactive UIs using LiveData and Data Binding.
+*   A data layer with a repository with Room as database.
+*   A collection of unit and integration.
 
-#### Login Activity
+Pending Task
+* UI testing with espresso
 
-#### Search Fragment
-- Allows you to search nearby doctors. It has following features
-    - Shows the name of the doctor, the address, and the profile pic of the doctor.
-    - When scroll to the bottom, more results are added until there are no more results left
-   
-### Pending task or issues
-- Need to cover UI test/Unit test
