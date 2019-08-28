@@ -18,7 +18,7 @@ ext {
     def versionGlide = '4.9.0'
     def versionLocation = '16.0.0'
     def versionJunit = '4.12'
-    def versionMockito = '2.7.22'
+    def versionMockito = '3.0.0'
     def versionCoreTesting = '1.1.0'
     def versionArchTesting = '2.0.1'
     def versionRoom = '2.2.0-beta01'
@@ -108,6 +108,7 @@ ext {
                        [configuration: "androidTestImplementation", dependency: test.androidxTestRunner],
                        [configuration: "androidTestImplementation", dependency: test.androidxTestCore],
                        [configuration: "androidTestImplementation", dependency: test.androidxTestRunner],
-                       [configuration: "androidTestImplementation", dependency: test.androidxTestArch]]
+                       [configuration: "androidTestImplementation", dependency: test.androidxTestArch],
+                       [configuration: "testImplementation", dependency: test.androidxTestArch]]
 }
 

@@ -10,8 +10,8 @@ object TestUtil {
             object : ArrayList<Restaurant>() {
                 init {
                     add(RESTAURANT)
-                    add(Restaurant("Royal Thai", SortingValues(8, 2, 3, 4, 5, 6, 7, 1.0), Status.CLOSED, false))
-                    add(Restaurant("Sushi One", SortingValues(1, 2, 3, 4, 5, 6, 7, 8.0), Status.ORDER_AHEAD, false))
+                    add(Restaurant("Royal Thai", SortingValues(2, 2, 3, 4, 5, 6, 7, 1.0), Status.CLOSED, false))
+                    add(Restaurant("Sushi One", SortingValues(3, 2, 3, 4, 5, 6, 7, 8.0), Status.ORDER_AHEAD, false))
                 }
             }
 }

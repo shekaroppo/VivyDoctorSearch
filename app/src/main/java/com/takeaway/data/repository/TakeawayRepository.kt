@@ -58,7 +58,7 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     suspend fun sortRestaurants(value: TakeawayPreferences.SortType): List<Restaurant> {
-        return  withContext(Dispatchers.IO) {
+        return  withContext(Dispatchers.Unconfined) {
             preferences.sortType = value
             val query = SimpleSQLiteQuery("$BASE_QUERY, ${preferences.getSortingValue}")
             restaurantDao.getRestaurants(query)

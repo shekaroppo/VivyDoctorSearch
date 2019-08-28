@@ -41,5 +41,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency)
+        testImplementation 'org.mockito:mockito-inline:3.0.0'
+        testImplementation 'com.google.truth:truth:0.44'
+        testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC3'
+
     }
 }

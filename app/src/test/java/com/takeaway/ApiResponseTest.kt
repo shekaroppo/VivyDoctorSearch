@@ -1,12 +1,16 @@
 package com.takeaway
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.takeaway.data.services.ApiService
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -14,14 +18,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
-
-@RunWith(JUnit4::class)
+@ExperimentalCoroutinesApi
 class ApiResponseTest {
 
     private lateinit var service: ApiService
     private lateinit var mockWebServer: MockWebServer
 
-    @Throws(IOException::class)
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
+
     @Before
     fun createService() {
         mockWebServer = MockWebServer()
@@ -39,10 +47,10 @@ class ApiResponseTest {
     }
 
     @Test
-    fun searchDoctorsTest() {
+    fun searchDoctorsTest() = runBlockingTest {
         enqueueResponse("restaurants.json")
 
-//        val testSubscriber = service.getRestaurants()
+        service.getRestaurants()
 //        testSubscriber.assertNoErrors()
 //        val response = testSubscriber.values()[0] as SearchResultResponse
 //        assertThat(response, notNullValue())
