@@ -3,7 +3,6 @@ package com.takeaway.restaurantlist
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.takeaway.MainCoroutineRule
 import com.takeaway.TestUtil
-import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.ui.restaurantlist.RestaurantListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi

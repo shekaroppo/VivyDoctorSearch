@@ -1,8 +1,7 @@
 package com.takeaway.data.services
 
-import com.takeaway.data.model.*
-import io.reactivex.Single
-import retrofit2.http.*
+import com.takeaway.data.model.RestaurantResponse
+import retrofit2.http.GET
 
 interface ApiService {
 

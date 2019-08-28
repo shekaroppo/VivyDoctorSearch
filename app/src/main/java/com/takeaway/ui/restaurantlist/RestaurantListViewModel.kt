@@ -2,17 +2,13 @@ package com.takeaway.ui.restaurantlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.takeaway.R
 import com.takeaway.data.TakeawayPreferences
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.ui.base.BaseViewModel
 import com.takeaway.utils.Constants
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
 import kotlin.Throwable as Throwable1
 

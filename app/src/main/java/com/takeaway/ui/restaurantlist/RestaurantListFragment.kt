@@ -8,9 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.takeaway.R
 import com.takeaway.data.TakeawayPreferences.SortType.*
 import com.takeaway.databinding.FragmentRestaurantListBinding

@@ -13,6 +13,8 @@ import com.takeaway.utils.Constants
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module(includes = [(NetworkModule::class), (AppModuleBinds::class)])
@@ -30,6 +32,12 @@ class AppModule {
         return Room.databaseBuilder(application, RestaurantDatabase::class.java, Constants.DATABASE_NAME)
                 .addMigrations(MIGRATION_1_2).build()
 
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideDispatchers(): CoroutineDispatcher {
+        return Dispatchers.IO
     }
 
     @Provides

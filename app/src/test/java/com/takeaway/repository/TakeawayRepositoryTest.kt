@@ -11,14 +11,16 @@ import com.takeaway.data.db.RestaurantDao
 import com.takeaway.data.model.RestaurantResponse
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.data.services.ApiService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.*
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 
 
 @ExperimentalCoroutinesApi
@@ -48,7 +50,7 @@ class TakeawayRepositoryTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         takeawayPreferences = TakeawayPreferences(preferences)
-        takeawayRepository = TakeawayRepository(apiService, restaurantDao, takeawayPreferences)
+        takeawayRepository = TakeawayRepository(apiService, restaurantDao, takeawayPreferences,Dispatchers.Unconfined)
     }
 
     @Test

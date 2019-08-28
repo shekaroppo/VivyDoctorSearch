@@ -7,7 +7,10 @@ import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.services.ApiService
 import com.takeaway.utils.Constants.BASE_QUERY
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +18,8 @@ import javax.inject.Singleton
 @Singleton
 class TakeawayRepository @Inject constructor(private val apiService: ApiService,
                                              private val restaurantDao: RestaurantDao,
-                                             private val preferences: TakeawayPreferences) : BaseRepository() {
+                                             private val preferences: TakeawayPreferences,
+                                             private val ioDispatcher: CoroutineDispatcher) : BaseRepository() {
 
     suspend fun getRestaurantsFromServer(): List<Restaurant> {
         val favourites = restaurantDao.getFavouriteRestaurantNames()
@@ -36,7 +40,7 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     fun setFavorite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(ioDispatcher).launch {
             restaurantDao.setFavorite(favourite)
             val restaurant = restaurantDao.getRestaurantByName(favourite.restaurantName)
             restaurant.favourite = true
@@ -45,7 +49,7 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     fun removeFavourite(favourite: Favourite) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(ioDispatcher).launch {
             restaurantDao.removeFavourite(favourite)
             val restaurant = restaurantDao.getRestaurantByName(favourite.restaurantName)
             restaurant.favourite = false
@@ -58,7 +62,7 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     suspend fun sortRestaurants(value: TakeawayPreferences.SortType): List<Restaurant> {
-        return  withContext(Dispatchers.Unconfined) {
+        return  withContext(ioDispatcher) {
             preferences.sortType = value
             val query = SimpleSQLiteQuery("$BASE_QUERY, ${preferences.getSortingValue}")
             restaurantDao.getRestaurants(query)
@@ -66,6 +70,6 @@ class TakeawayRepository @Inject constructor(private val apiService: ApiService,
     }
 
     suspend fun searchRestaurantsByName(query: String): List<Restaurant> {
-        return  withContext(Dispatchers.IO) {restaurantDao.searchRestaurantsByName(query)}
+        return  withContext(ioDispatcher) {restaurantDao.searchRestaurantsByName(query)}
     }
 }

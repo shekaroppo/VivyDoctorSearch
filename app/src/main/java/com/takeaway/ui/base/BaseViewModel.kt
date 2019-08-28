@@ -1,9 +1,8 @@
 package com.takeaway.ui.base
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import androidx.databinding.ObservableField
-import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
