@@ -11,7 +11,7 @@ This project is to showcase restaurant list with following features :-
 In this branch you'll find:
 *   Kotlin Coroutines for background operations.
 *   A single-activity architecture, using the Navigation component to manage fragment operations.
-*   A presentation layer that contains a fragment and a ViewModel per screen.
+*   A presentation layer that contains a fragment and a ViewModel to show restaurant rist.
 *   Reactive UIs using LiveData and Data Binding.
 *   A data layer with a repository with Room as database.
 *   A collection of unit and integration.
