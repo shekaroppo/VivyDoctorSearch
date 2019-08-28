@@ -21,9 +21,6 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
     @Inject
     lateinit var restaurantListAdapter: RestaurantListAdapter
 
-    @Inject
-    lateinit var eventHandler: RestaurantEventHandler
-
     private lateinit var searchView: SearchView
 
     override fun layoutId() = R.layout.fragment_restaurant_list
@@ -76,7 +73,6 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
 
     private fun subscribeToModel() {
         binding.restaurantListViewModel = viewModel
-        binding.eventHandler = eventHandler
         viewModel.restaurantsMutableLiveData.observe(this, Observer { restaurantListAdapter.updateData(it) })
     }
 

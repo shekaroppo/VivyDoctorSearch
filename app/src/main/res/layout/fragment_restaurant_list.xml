@@ -26,7 +26,7 @@
                 style="@style/wrap"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:onClick="@{(view) -> eventHandler.onReload(restaurantListViewModel)}"
+                android:onClick="@{(view) -> restaurantListViewModel.getRestaurants()}"
                 android:text="@string/retry" />
         </LinearLayout>
 
@@ -66,10 +66,6 @@
         <variable
             name="restaurantListViewModel"
             type="com.takeaway.ui.restaurantlist.RestaurantListViewModel" />
-
-        <variable
-            name="eventHandler"
-            type="com.takeaway.ui.restaurantlist.RestaurantEventHandler" />
 
         <variable
             name="query"
