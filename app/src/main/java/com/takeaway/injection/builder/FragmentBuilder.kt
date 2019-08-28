@@ -10,6 +10,6 @@ abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(
             modules = [(RestaurantListFragmentModule::class)])
-    internal abstract fun bindSearchFragmentModule(): RestaurantListFragment
+    internal abstract fun bindRestaurantListFragmentModule(): RestaurantListFragment
 
 }
