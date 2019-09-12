@@ -13,7 +13,7 @@ class RestaurantListFragmentModule {
 
     @Provides
     fun provideRestaurantListAdapter(takeawayRepository: TakeawayRepository): RestaurantListAdapter {
-        return RestaurantListAdapter(listOf(), takeawayRepository)
+        return RestaurantListAdapter(takeawayRepository)
     }
 }
 

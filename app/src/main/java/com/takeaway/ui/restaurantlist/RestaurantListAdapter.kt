@@ -3,18 +3,15 @@ package com.takeaway.ui.restaurantlist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.takeaway.data.model.Favourite
 import com.takeaway.data.model.Restaurant
 import com.takeaway.data.repository.TakeawayRepository
 import com.takeaway.databinding.ItemRestaurantBinding
 
-class RestaurantListAdapter(private var restaurants: List<Restaurant>, private val takeawayRepository: TakeawayRepository) : RecyclerView.Adapter<RestaurantListAdapter.SearchViewHolder>() {
-
-    fun updateData(restaurants: List<Restaurant>) {
-        this.restaurants = restaurants
-        notifyDataSetChanged()
-    }
+class RestaurantListAdapter(private val takeawayRepository: TakeawayRepository) : ListAdapter<Restaurant,RestaurantListAdapter.SearchViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val bindings: ItemRestaurantBinding = ItemRestaurantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,12 +19,8 @@ class RestaurantListAdapter(private var restaurants: List<Restaurant>, private v
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        val restaurant = restaurants[position]
+        val restaurant = getItem(position)
         holder.bind(restaurant)
-    }
-
-    override fun getItemCount(): Int {
-        return restaurants.size
     }
 
     inner class SearchViewHolder(private val binding: ItemRestaurantBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -45,5 +38,15 @@ class RestaurantListAdapter(private var restaurants: List<Restaurant>, private v
             else
                 takeawayRepository.removeFavourite(Favourite(restaurant.name))
         }
+    }
+}
+private class PlantDiffCallback : DiffUtil.ItemCallback<Restaurant>() {
+
+    override fun areItemsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
+        return oldItem.name == newItem.name
+    }
+
+    override fun areContentsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
+        return oldItem == newItem
     }
 }

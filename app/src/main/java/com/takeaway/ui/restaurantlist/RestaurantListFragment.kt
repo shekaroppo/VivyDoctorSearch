@@ -73,7 +73,7 @@ class RestaurantListFragment : BaseFragment<FragmentRestaurantListBinding, Resta
 
     private fun subscribeToModel() {
         binding.restaurantListViewModel = viewModel
-        viewModel.restaurantsMutableLiveData.observe(this, Observer { restaurantListAdapter.updateData(it) })
+        viewModel.restaurantsMutableLiveData.observe(this, Observer { restaurantListAdapter.submitList(it) })
     }
 
 
